@@ -16,11 +16,12 @@ function Navbar() {
   }
   return (
     <>
-      <nav className="w-full">
-        <div className="w-full mx-auto px-2 sm:px-6 lg:px-8">
+      <nav className="w-full ">
+        <div className="w-full mx-auto px-2 sm:px-6 lg:px-8 ">
           <div className="flex items-center justify-between h-16 w-full">
             <div className="flex-1 flex items-center justify-between">
               <div className="flex-shrink-0 flex items-center">
+                {/* <span className="text-xl font-bold">Logo</span> */}
                 <img class="object-fill w-[13rem]"
                   src="assets/logo.png" alt="website-logo" />
               </div>
@@ -41,25 +42,29 @@ function Navbar() {
               </div>
               {/* WishList,Cart,Profile,*/}
               <div className='flex  items-center space-x-6'>
-                <Link key="" to=""
+                <Link key="1" to="/wishlist"
                   className={` font-thin text-black hover:text-gray-500 
                   hover:font-semibold  py-2 uppercase`}       >
                   <FontAwesomeIcon className="block  text-[25px] font-[200]  pb-0 
                    text-gray-500 transition-colors" icon={faHeart} />
                   {/* WishList */}
                 </Link>
-                <Link key="" to=""
+                <Link key="2" to="/cart"
                   className={` font-thin text-black hover:text-gray-500 
                   hover:font-semibold  py-2 uppercase`}       >
                   <FontAwesomeIcon className="block text-[30px] font-[200]  pb-0 
                    text-gray-500 transition-colors" icon={faShoppingBag} />
                   {/* Cart */}
                 </Link>
-                <Link key="" to=""
-                  className={` font-thin text-black hover:text-gray-500 hover:font-semibold py-2 uppercase`}       >
+                <Link key="3" to="/login"
+                  className={` font-thin text-black hover:text-gray-500 hover:font-semibold py-2 uppercase`}
+                // onClick={() => handleLinkClick(item.path)}
+                >
                   <FontAwesomeIcon className="block text-[30px] font-[200]  pb-0 
                    text-gray-500 transition-colors" icon={faUserCircle} />
                   {/* Profile */}
+                  
+
                 </Link>
               </div>
             </div>
