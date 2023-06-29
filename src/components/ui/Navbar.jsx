@@ -15,13 +15,13 @@ function Navbar() {
   }
   return (
     <>
-      <nav className="w-full ">
+      <nav className="w-full h-auto ">
         <div className="w-full mx-auto px-2 sm:px-6 lg:px-8 ">
           <div className="flex items-center justify-between h-16 w-full">
             <div className="flex-1 flex items-center justify-between">
               <div className="flex-shrink-0 flex items-center">
                 {/* <span className="text-xl font-bold">Logo</span> */}
-                <img class="object-fill w-[13rem]"
+                <img class="object-fill mt-3 h-[25rem] w-[24rem]"
                   src="assets/logo.png" alt="website-logo" />
               </div>
               <div className="hidden sm:block sm:ml-6">
@@ -42,7 +42,7 @@ function Navbar() {
                 </div>
               </div>
               <div className='flex  items-center space-x-6'>
-                <Link key="" to=""
+                <Link key="1" to="/wishlist"
                   className={` font-thin text-black hover:text-gray-500 
                   hover:font-semibold  py-2 uppercase`}
                 // onClick={() => handleLinkClick(item.path)}
@@ -51,7 +51,7 @@ function Navbar() {
                    text-gray-500 transition-colors" icon={faHeart} />
                   {/* WishList */}
                 </Link>
-                <Link key="" to=""
+                <Link key="2" to="/cart"
                   className={` font-thin text-black hover:text-gray-500 
                   hover:font-semibold  py-2 uppercase`}
                 // onClick={() => handleLinkClick(item.path)}
@@ -60,13 +60,13 @@ function Navbar() {
                    text-gray-500 transition-colors" icon={faShoppingBag} />
                   {/* Cart */}
                 </Link>
-                <Link key="" to=""
+                <Link key="3" to="/login"
                   className={` font-thin text-black hover:text-gray-500 hover:font-semibold py-2 uppercase`}
                 // onClick={() => handleLinkClick(item.path)}
                 >
-                  {/* <FontAwesomeIcon className="block text-[30px] font-[200]  pb-0 
+                  <FontAwesomeIcon className="block text-[30px] font-[200]  pb-0 
                    text-gray-500 transition-colors" icon={faUserCircle} />
-                  Profile */}
+                  {/* Profile */}
                   
 
                 </Link>
