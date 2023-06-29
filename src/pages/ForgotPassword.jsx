@@ -17,7 +17,7 @@ export default function ForgotPassword() {
           
           <button className='w-full my-5 py-2 bg-teal-500'>Send Reset Link</button>
           
-          <p className='text-gray-300 text-lg'>Login to your Account. <a className='text-teal-500' href='/'>Sign In</a></p>
+          <p className='text-gray-300 text-lg'>Login to your Account. <a className='text-teal-500' href='/login'>Sign In</a></p>
           <p className='text-gray-300 text-lg'>Don't Have an Account? <a className='text-teal-500' href='/register'>Register Now!!!</a></p>
         </form>
       </div>

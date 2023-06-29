@@ -25,7 +25,7 @@ export default function Register() {
           
           <button className='w-full my-5 py-2 bg-teal-500'>Register</button>
 
-          <p className='text-gray-300 text-lg'>Already have an Account? <a className='text-teal-500' href='/'>Sign In</a></p>
+          <p className='text-gray-300 text-lg'>Already have an Account? <a className='text-teal-500' href='/login'>Sign In</a></p>
         </form>
       </div>
     </div>

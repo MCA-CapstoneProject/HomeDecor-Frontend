@@ -5,7 +5,6 @@ const Shop = React.lazy(()=> import("../pages/Shop"));
 const Blog = React.lazy(()=> import("../pages/Blogs"));
 const About = React.lazy(()=> import("../pages/About"));
 const FAQs = React.lazy(()=> import("../pages/FAQs"));
-const Login = React.lazy(()=> import("../pages/Login"));
 
 export const ROUTES_ARR =[
     {name:"Home", component: Home, path:"/"},
@@ -13,5 +12,4 @@ export const ROUTES_ARR =[
     {name:"Blog", component: Blog, path:"/blog"},
     {name:"About", component: About, path:"/about"},
     {name:"FAQs", component: FAQs, path:"/faqs"},
-    {name:"Login", component: Login, path:"/login"},
 ]

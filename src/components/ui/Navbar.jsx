@@ -42,7 +42,7 @@ function Navbar() {
                 </div>
               </div>
               <div className='flex  items-center space-x-6'>
-                <Link key="" to=""
+                <Link key="1" to=""
                   className={` font-thin text-black hover:text-gray-500 
                   hover:font-semibold  py-2 uppercase`}
                 // onClick={() => handleLinkClick(item.path)}
@@ -51,7 +51,7 @@ function Navbar() {
                    text-gray-500 transition-colors" icon={faHeart} />
                   {/* WishList */}
                 </Link>
-                <Link key="" to=""
+                <Link key="2" to=""
                   className={` font-thin text-black hover:text-gray-500 
                   hover:font-semibold  py-2 uppercase`}
                 // onClick={() => handleLinkClick(item.path)}
@@ -60,13 +60,13 @@ function Navbar() {
                    text-gray-500 transition-colors" icon={faShoppingBag} />
                   {/* Cart */}
                 </Link>
-                <Link key="" to=""
+                <Link key="3" to="/login"
                   className={` font-thin text-black hover:text-gray-500 hover:font-semibold py-2 uppercase`}
                 // onClick={() => handleLinkClick(item.path)}
                 >
-                  {/* <FontAwesomeIcon className="block text-[30px] font-[200]  pb-0 
+                  <FontAwesomeIcon className="block text-[30px] font-[200]  pb-0 
                    text-gray-500 transition-colors" icon={faUserCircle} />
-                  Profile */}
+                  {/* Profile */}
                   
 
                 </Link>
