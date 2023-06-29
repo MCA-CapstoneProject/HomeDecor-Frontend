@@ -64,9 +64,11 @@ function Navbar() {
                   className={` font-thin text-black hover:text-gray-500 hover:font-semibold py-2 uppercase`}
                 // onClick={() => handleLinkClick(item.path)}
                 >
-                  <FontAwesomeIcon className="block text-[30px] font-[200]  pb-0 
+                  {/* <FontAwesomeIcon className="block text-[30px] font-[200]  pb-0 
                    text-gray-500 transition-colors" icon={faUserCircle} />
-                  {/* Profile */}
+                  Profile */}
+                  
+
                 </Link>
               </div>
             </div>
