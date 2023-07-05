@@ -41,7 +41,7 @@ function Home() {
           <div className="m-8">
             <h1 className="text-center text-xl font-bold text-[#9d6a37]">Shop By Categories</h1>
             {/* Categories-Cards */}
-            <div className="cards flex mt-4 gap-12 overflow-hidden">
+            <div className="cards flex justify-center mt-4 gap-12 overflow-hidden">
               <div className="">
                 <a href="#" class="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
                   <img class="object-fill w-[13rem] h-[13rem] border-solid rounded-full" src="assets/productimages/vase-banner.jpg" alt="" />
@@ -76,8 +76,8 @@ function Home() {
           </div>
         </div>
         {/* Explore Most Wanted */}
-        <div className="mt-5">
-          <div className="m-8">
+        <div className="mt-5 ">
+          <div className="flex flex-col align-center items-center justify-center">
             <h1 className="text-center text-xl font-bold text-[#9d6a37]">Explore Most Wanted</h1>
             {/* Categories-Cards */}
             <div className="cards grid grid-cols-3 mt-4 gap-6 overflow-hidden">
