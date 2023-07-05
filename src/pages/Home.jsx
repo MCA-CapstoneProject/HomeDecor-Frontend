@@ -7,7 +7,7 @@ function Home() {
   return (
     <>
       <div>
-        {/* Banner  */}
+        {/*  Main-Banner  */}
         <div className="flex min-h-screen bg-opacity-30 bg-[url(assets/featureimages/main-banner.jpg)] bg-no-repeat bg-center">
           <div className="text-white w-3/6 grid content-center pl-8">
             <h1 className="font-extrabold text-7xl">New Age Of <br /> Modern Interior</h1>

@@ -16,13 +16,12 @@ function Navbar() {
   }
   return (
     <>
-      <nav className="w-full ">
+      <nav className="w-full">
         <div className="w-full mx-auto px-2 sm:px-6 lg:px-8 ">
           <div className="flex items-center justify-between h-16 w-full">
             <div className="flex-1 flex items-center justify-between">
               <div className="flex-shrink-0 flex items-center">
-                {/* <span className="text-xl font-bold">Logo</span> */}
-                <img class="object-fill w-[13rem]"
+                <img class="object-fill w-[15rem]"
                   src="assets/logo.png" alt="website-logo" />
               </div>
               {/* Pages */}
