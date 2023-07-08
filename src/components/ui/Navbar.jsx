@@ -110,6 +110,7 @@ function Navbar() {
         </div>
       </nav>
 
+      {/* Products-Navbar */}
       <ProductsNavbar></ProductsNavbar>
       <Routes>
         {ROUTES_ARR.map((item, idx) => (
