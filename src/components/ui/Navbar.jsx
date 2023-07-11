@@ -6,23 +6,23 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingBag } from "@fortawesome/fontawesome-free-solid";
 import { faHeart,faUserCircle, } from "@fortawesome/fontawesome-free-regular";
-// import { useOktaAuth } from '@okta/okta-react';
-import { useSelector } from "react-redux/es/hooks/useSelector";
-import ProductsNavbar from "../ui/ProductsNavbar"
+import ProductsNavbar from "../ui/ProductsNavbar";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Navbar() {
-  const username = useSelector((state) => state.username);
-  // const { authState, authService } = useOktaAuth();
-  
-  // const login = async () => {
-  //   await authService.login('/');
-  // };
-
-  // const logout = async () => {
-  //   await authService.logout('/');
-  // };
-
+  const { user, isAuthenticated, logout, loginWithRedirect, getAccessTokenSilently} = useAuth0();
   const [activeLink, setActiveLink] = useState("");
+ 
+  {/** Here we will get accessToken that will be used with apis */}
+  // if (isAuthenticated) {
+  //   try {
+  //     const accessToken = await getAccessTokenSilently();
+  //     console.log('Access token:', accessToken);
+  //     // Use the access token as needed
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //   }
+  // }
 
   const handleLinkClick = (path) => {
     setActiveLink(path);
@@ -46,8 +46,8 @@ function Navbar() {
                       <Link
                         key={item.path}
                         to={item.path}
-                        className={`font-thin text-black hover:text-gray-500 hover:font-semibold px-3 py-2 uppercase ${
-                          activeLink === item.path ? "text-[#3C4048]" : ""
+                        className={`text-black hover:text-gray-500 hover:font-semibold px-3 py-2 uppercase ${
+                          activeLink === item.path && "text-gray-500 font-bold"
                         }`}
                         onClick={() => handleLinkClick(item.path)}
                       >
@@ -57,8 +57,17 @@ function Navbar() {
                   })}
                 </div>
               </div>
+              
               {/* WishList,Cart,Profile,*/}
-              <div className='flex  items-center space-x-6'>
+              <div className='flex gap-x-10'>
+              <Link
+                    to="/seller-dashboard"
+                    target="_blank"
+                    className="bg-gray-500 text-slate-100 p-2 pt-3 rounded-md font-bold hover:text-white hover:bg-gray-600"
+                  >
+                   Become a seller
+                  </Link>
+              <div className="flex gap-x-6">
                 <Link key="1" to="/wishlist"
                   className={` font-thin text-black hover:text-gray-500 
                   hover:font-semibold  py-2 uppercase`}       >
@@ -87,23 +96,15 @@ function Navbar() {
                   />
                   {/*Profile */}
                 </Link>
-                {!username ? (
-                  <button
-                    key="3"
-                    to="/login"
-                    className="bg-gray-500 text-slate-100 p-2 rounded-md font-bold hover:text-white hover:bg-gray-600"
+                
+                  <Link
+                    to={isAuthenticated && "/"}
+                    onClick={()=>{isAuthenticated ? logout({ logoutParams: { returnTo: window.location.origin } }) : loginWithRedirect()}}
+                    className="bg-gray-500 text-slate-100 p-2 pt-3 rounded-md font-bold hover:text-white hover:bg-gray-600"
                   >
-                    Login
-                  </button>
-                ) : (
-                  <button
-                    key=""
-                    to="/"
-                    className="bg-gray-500 text-slate-100 p-2 rounded-md font-bold hover:text-white hover:bg-gray-600"
-                  >
-                    Logout
-                  </button>
-                )}
+                    {!isAuthenticated ? "Login" : "Logout"}
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -112,20 +113,6 @@ function Navbar() {
 
       {/* Products-Navbar */}
       <ProductsNavbar></ProductsNavbar>
-      <Routes>
-        {ROUTES_ARR.map((item, idx) => (
-          <Route
-            key={idx}
-            path={item.path}
-            element={
-              <SuspenseWrapper>
-                <item.component />
-              </SuspenseWrapper>
-            }
-          />
-        ))}
-        <Route element={NotFound} />
-      </Routes>
     </>
   );
 }
