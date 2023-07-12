@@ -5,7 +5,7 @@ const Shop = React.lazy(() => import("../pages/Shop"));
 const Blog = React.lazy(() => import("../pages/Blogs"));
 const About = React.lazy(() => import("../pages/About"));
 const FAQs = React.lazy(() => import("../pages/FAQs"));
-const Products = React.lazy(() => import('../pages/Products'));
+// const Products = React.lazy(() => import('../pages/Products'));
 
 export const ROUTES_ARR = [
     { name: "Home", component: Home, path: "/" },
