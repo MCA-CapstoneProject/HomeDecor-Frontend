@@ -19,7 +19,7 @@ const Authentication = () => {
   const isPublicRoute = usePublicRoutes();
   return (
     <>
-      {!isPublicRoute && (
+      {!isPublicRoute ? (
         <Auth0Provider
           domain={domain}
           clientId={clientId}
@@ -45,45 +45,46 @@ const Authentication = () => {
             </Routes>
           </Layout>
         </Auth0Provider>
-      )}
+      ):
       <Layout2>
-        <Routes>
-          <Route
-            path="/seller-dashboard"
-            exact
-            element={
-              <SuspenseWrapper>
-                <SellerDashboard />
-              </SuspenseWrapper>
-            }
-          />
-          <Route
-            path="/seller-dashboard/shop"
-            element={
-              <SuspenseWrapper>
-              
-              </SuspenseWrapper>
-            }
-          />
-          <Route
-            path="/seller-dashboard/add-product"
-            element={
-              <SuspenseWrapper>
-                <AddProduct />
-              </SuspenseWrapper>
-            }
-          />
-          <Route
-            path="/seller-dashboard/profile"
-            exact
-            element={
-              <SuspenseWrapper>
-                <h1>PROFILE OF SELLER</h1>
-              </SuspenseWrapper>
-            }
-          />
-        </Routes>
-      </Layout2>
+      <Routes>
+        <Route
+          path="/seller-dashboard"
+          exact
+          element={
+            <SuspenseWrapper>
+              <SellerDashboard />
+            </SuspenseWrapper>
+          }
+        />
+        <Route
+          path="/seller-dashboard/shop"
+          element={
+            <SuspenseWrapper>
+            
+            </SuspenseWrapper>
+          }
+        />
+        <Route
+          path="/seller-dashboard/add-product"
+          element={
+            <SuspenseWrapper>
+              <AddProduct />
+            </SuspenseWrapper>
+          }
+        />
+        <Route
+          path="/seller-dashboard/profile"
+          exact
+          element={
+            <SuspenseWrapper>
+              <h1>PROFILE OF SELLER</h1>
+            </SuspenseWrapper>
+          }
+        />
+      </Routes>
+    </Layout2>
+      }
     </>
   );
 };

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CurrencyInput from "react-currency-input-field";
 
 function AddProduct() {
-  const prefix = "INR ";
+  const prefix ="Rs. " ;
   const [value, setValue] = useState(0);
 
   const handleChange = (e) => {
