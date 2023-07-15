@@ -10,6 +10,8 @@ import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/cart";
 import SellerDashboard from "./pages/seller/SellerDashboard";
 import AddProduct from "./pages/seller/AddProduct";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const Authentication = () => {
   const domain = "dev-72e1ark1yfj8hz53.us.auth0.com";
@@ -19,7 +21,7 @@ const Authentication = () => {
   const isPublicRoute = usePublicRoutes();
   return (
     <>
-      {!isPublicRoute && (
+      {!isPublicRoute ? (
         <Auth0Provider
           domain={domain}
           clientId={clientId}
@@ -42,48 +44,51 @@ const Authentication = () => {
               <Route element={NotFound} />
               <Route path="/wishlist" exact element={<Wishlist />} />
               <Route path="/cart" exact element={<Cart />} />
+              <Route path="/login" exact element={<Login />} />
+              <Route path="/Register" exact element={<Register />} />
             </Routes>
           </Layout>
         </Auth0Provider>
-      )}
+      ):
       <Layout2>
-        <Routes>
-          <Route
-            path="/seller-dashboard"
-            exact
-            element={
-              <SuspenseWrapper>
-                <SellerDashboard />
-              </SuspenseWrapper>
-            }
-          />
-          <Route
-            path="/seller-dashboard/shop"
-            element={
-              <SuspenseWrapper>
-              
-              </SuspenseWrapper>
-            }
-          />
-          <Route
-            path="/seller-dashboard/add-product"
-            element={
-              <SuspenseWrapper>
-                <AddProduct />
-              </SuspenseWrapper>
-            }
-          />
-          <Route
-            path="/seller-dashboard/profile"
-            exact
-            element={
-              <SuspenseWrapper>
-                <h1>PROFILE OF SELLER</h1>
-              </SuspenseWrapper>
-            }
-          />
-        </Routes>
-      </Layout2>
+      <Routes>
+        <Route
+          path="/seller-dashboard"
+          exact
+          element={
+            <SuspenseWrapper>
+              <SellerDashboard />
+            </SuspenseWrapper>
+          }
+        />
+        <Route
+          path="/seller-dashboard/shop"
+          element={
+            <SuspenseWrapper>
+            
+            </SuspenseWrapper>
+          }
+        />
+        <Route
+          path="/seller-dashboard/add-product"
+          element={
+            <SuspenseWrapper>
+              <AddProduct />
+            </SuspenseWrapper>
+          }
+        />
+        <Route
+          path="/seller-dashboard/profile"
+          exact
+          element={
+            <SuspenseWrapper>
+              <h1>PROFILE OF SELLER</h1>
+            </SuspenseWrapper>
+          }
+        />
+      </Routes>
+    </Layout2>
+      }
     </>
   );
 };
