@@ -137,7 +137,7 @@ function Home() {
           </div>
         </div>
         {/* New Arrivals */}
-        <div className="ml-4">
+        <div className="mt-10 ml-4">
           <div className="text-center font-bold text-[#9d6a37]">
             <h1 className=" text-xl font-bold">Discover New Arrivals</h1>
             <h1 className=" text-2xl font-bold">Shop Before They Become Old</h1>
