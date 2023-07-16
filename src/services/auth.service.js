@@ -1,6 +1,7 @@
 import axios from "axios";
+// import axiosInstance from "../components/axiosInstance";
 
-const API_URL = "http://localhost:8082/api/auth/";
+// const API_URL = "http://localhost:8082/";
 
 class AuthService {
   async login(username, password) {
@@ -16,12 +17,14 @@ class AuthService {
     localStorage.removeItem("user");
   }
 
-  async register(email, password) {
+  async register(username, email, password) {
     const userData ={
-        email: email,
-        password:password
+
+      "email":email,
+      "userName":username,
+      "password":password
     }
-    return await axios.post(API_URL + "signup", userData,{
+    return await axios.post("http://localhost:8082/api/auth/signup", userData,{
         headers: {
                   'Content-Type': 'application/json',
                   // Other headers if needed
@@ -29,6 +32,7 @@ class AuthService {
               })
                 .then(response => {
                   console.log(response)
+                  window.location.href="/"
                 })
                 .catch(error => {
                   // Handle any errors

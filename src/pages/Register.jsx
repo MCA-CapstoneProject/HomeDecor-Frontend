@@ -5,10 +5,10 @@ import { useState } from "react";
 export default function Register() {
   const [email, setEmail] = useState();
   const [pswd, setPswd] = useState();
-
+  const [username, setUsername] = useState();
   const handleSubmit = (e) =>{
     e.preventDefault();
-    AuthService.register(email,pswd)
+    AuthService.register(username,email,pswd)
   }
 
   return (
@@ -23,6 +23,14 @@ export default function Register() {
             {" "}
             Register
           </h2>
+          <div className="flex flex-col text-gray-300 py-2 ">
+            <label>Username*</label>
+            <input
+              className="rounded-lg text-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+              type="username"
+              onChange={(e)=>{setUsername(e.target.value)}}
+            />
+          </div>
           <div className="flex flex-col text-gray-300 py-2 ">
             <label>Email Id*</label>
             <input
