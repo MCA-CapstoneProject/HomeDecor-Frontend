@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingBag } from "@fortawesome/fontawesome-free-solid";
 import { faHeart, faUserCircle, } from "@fortawesome/fontawesome-free-regular";
-import  {plant, Art, Lights, Mirrors, Showpieces } from "../constants/products.constants"
+import  {plant} from "../../constants/products.constants"
 
-const Products = () => {
+const Plantdecor = () => {
     return (
         <>
             <div className=''>
@@ -118,4 +118,4 @@ const Products = () => {
     )
 }
 
-export default Products
+export default Plantdecor;

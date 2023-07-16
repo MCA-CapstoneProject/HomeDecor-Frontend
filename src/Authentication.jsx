@@ -12,6 +12,7 @@ import SellerDashboard from "./pages/seller/SellerDashboard";
 import AddProduct from "./pages/seller/AddProduct";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Plantdecor from "./pages/categories/Plantdecor";
 
 const Authentication = () => {
   const domain = "dev-72e1ark1yfj8hz53.us.auth0.com";
@@ -46,6 +47,7 @@ const Authentication = () => {
               <Route path="/cart" exact element={<Cart />} />
               <Route path="/login" exact element={<Login />} />
               <Route path="/Register" exact element={<Register />} />
+              <Route path="/shop/plant-decor" exact element={<Plantdecor />} />
             </Routes>
           </Layout>
         </Auth0Provider>
