@@ -1,4 +1,5 @@
 import cardImg from './images/card1.jpg';
+import AuthService from "../services/auth.service";
 import { useState } from 'react';
 
 export default function Login() {
