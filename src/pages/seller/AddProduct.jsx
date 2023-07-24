@@ -26,6 +26,15 @@ function AddProduct() {
             <option value="PhotoFrames">Photo Frames</option>
             <option value="Mirrors">Mirrors</option>
         </select>
+        <select className="form-select outline-none text-gray-400 border-b-2 mt-8">
+            <option selected value="Enter Quantity">Enter Quantity</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        
         <div className='text-gray-500 my-8 border-b-2'>
         <CurrencyInput className='outline-none'
         prefix={prefix}
