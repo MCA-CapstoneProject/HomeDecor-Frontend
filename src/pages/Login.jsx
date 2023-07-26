@@ -8,8 +8,10 @@ export default function Login() {
 
   const handleSubmit = (e) =>{
     e.preventDefault();
-    AuthService.login(email,pswd)
+    AuthService.login(email,pswd); 
   }
+  
+
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 m-20 h-3/6 scale-x-75 scale-y-90'>
       <div className='sm:block'>
@@ -35,7 +37,7 @@ export default function Login() {
           </div>
           <button type='submit' className='w-full my-5 py-2 bg-teal-500'>Sign In</button>
 
-          <p className='text-gray-300 text-lg'>Don't Have an Account? <a className='text-teal-500' href='/register'>Register Now!!!</a></p>
+          <p className='text-gray-300 text-lg'>Don&apos;t Have an Account? <a className='text-teal-500' href='/register'>Register Now!!!</a></p>
         </form>
       </div>
     </div>

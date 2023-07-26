@@ -1,59 +1,25 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ROUTES_ARR } from "../../constants/routes.constants";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingBag } from "@fortawesome/fontawesome-free-solid";
 import { faHeart,faUserCircle, } from "@fortawesome/fontawesome-free-regular";
 import ProductsNavbar from "../ui/ProductsNavbar";
-import { useAuth0 } from "@auth0/auth0-react";
-import Login from "../../pages/Login";
+import { useSelector } from "react-redux";
+import { authState } from "../../features/authenticate/authSlice";
+import { fetchAccessToken } from "../../helper/Auth.helper";
 
 function Navbar() {
-  const { user, isAuthenticated, logout, loginWithRedirect, getAccessTokenSilently} = useAuth0();
   const [activeLink, setActiveLink] = useState("");
-
-  console.log(user)
-  const url = "http://localhost:8082/user/add"
-  const data={
-    "fullName": "Dev Chopra",
-    "userName": "devC659",
-    "email" : "devchopra@gmail.com",
-    "password": "vjner86*",
-    "gender" : "Male",
-    "phone" : 8788766,
-    "address" : "Gokul Nivas"
-}
-
-// async function addUser(){
-//   await axios.post(url, data, {
-//     headers: {
-//       'Content-Type': 'application/json',
-       // Other headers if needed
-//     },
-//   })
-//     .then(response => {
-//       console.log(response)
-//     })
-//     .catch(error => {
-       // Handle any errors
-//       console.log(error)
-//     });
-// }
-// addUser()
- 
-  {/** Here we will get accessToken that will be used with apis */}
-  // if (isAuthenticated) {
-  //   try {
-  //     const accessToken = await getAccessTokenSilently();
-  //     console.log('Access token:', accessToken);
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   }
-  // }
-
+  const auth = useSelector(authState);
   const handleLinkClick = (path) => {
     setActiveLink(path);
   };
+  const handleLogout = () =>{
+    localStorage.removeItem("token");
+    fetchAccessToken(undefined);
+  }
+
   return (
     <>
       <nav className="w-full">
@@ -62,7 +28,7 @@ function Navbar() {
             <div className="flex-1 flex items-center justify-between">
               <div className="flex-shrink-0 flex items-center">
                 {/* <span className="text-xl font-bold">Logo</span> */}
-                <img class="object-fill w-[13rem]"
+                <img className="object-fill w-[13rem]"
                   src="assets/logo.png" alt="website-logo" />
               </div>
               {/* Pages */}
@@ -125,11 +91,11 @@ function Navbar() {
                 </Link>
                 
                   <Link
-                    to="/login"
-                    onClick={()=> <Login/>}
+                    to={auth.accessToken? "/" :"/login"}
+                    onClick={auth.accessToken && handleLogout}
                     className="bg-gray-500 text-slate-100 p-2 pt-3 rounded-md font-bold hover:text-white hover:bg-gray-600"
                   >
-                    {!isAuthenticated ? "Login" : "Logout"}
+                    {!auth.accessToken ? "Login" : "Logout"}
                   </Link>
                 </div>
               </div>

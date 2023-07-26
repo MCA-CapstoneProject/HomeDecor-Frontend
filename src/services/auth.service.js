@@ -1,32 +1,18 @@
 import axios from "axios";
-// import axiosInstance from "../components/axiosInstance";
-
-// const API_URL = "http://localhost:8082/";
 
 class AuthService {
-
   async login(usernameOrEmail, password) {
-
+    
     await axios.post("http://localhost:8082/api/auth/login", { usernameOrEmail, password })
               .then(response => {
-                
-                console.log(response);
                 if (response.status === 200) {
                   localStorage.setItem("token", JSON.stringify(response.data));
-                  
-                  console.log(response);
-                  console.log(response.data);
-                  
-                  // window.location.href="/";
-          
-                  return response;
-          
+                  window.location.href ="/"
                 }
                 else if (response.status === 401) {
                   console.log(response);
                 }
                 
-                return response.data;
             })
               .catch(error => {
                 // Handle any errors

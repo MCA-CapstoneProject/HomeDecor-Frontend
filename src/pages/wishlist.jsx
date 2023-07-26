@@ -1,4 +1,4 @@
-import React from 'react'
+
 // import Products from "../constants/wishlist.constants"
 
 export default function Wishlist() {
