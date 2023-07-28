@@ -2,7 +2,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { usePublicRoutes } from "./helper/PublicRoute";
 import Layout from "./components/ui/Layout";
 import Layout2 from "./components/ui/seller/Layout2";
-import { Routes, Router, Route  } from "react-router-dom";
+import { Routes,  Route  } from "react-router-dom";
 import { ROUTES_ARR } from "./constants/routes.constants";
 import SuspenseWrapper from "./lib/utils/routing/SuspenseWrapper";
 import NotFound from "./pages/NotFound";
