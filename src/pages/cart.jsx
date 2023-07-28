@@ -32,7 +32,7 @@ export default function cart() {
                         <div className='mt-5'>
                                 <p>Sculpted Wall Mirror</p>
                                 <p className='text-slate-400'>By MegaArts from Decorica</p>
-                                <p className='border-2 w-24 mt-4 p-2'>QTY <select name="" id="">
+                                <p className='border-2 w-24 mt-4 p-2'>QTY <select className='p-1' name="" id="">
                                   <option value="1"> 1</option>
                                   <option value="2"> 2</option>
                                   <option value="3"> 3</option>
@@ -63,7 +63,7 @@ export default function cart() {
                   </div> */}
                   <div className='border-2 mt-3 w-[500px] h-auto'>
                     <h1 className='font-semibold text-center text-xl mt-3'>Cart Summary</h1>
-                    <div className='flex '>
+                    <div className='flex'>
                                 <div className='ml-3'>
                                 <div className='mt-4'>Items in Cart</div>
                                 <div className='mb-2'>Cart Total Price</div>

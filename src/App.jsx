@@ -1,8 +1,9 @@
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import Authentication from "./Authentication.jsx";
-import axios from "axios";
+
 import { useState, useEffect } from "react";
+import ProductCard from "./pages/ProductCard";
 
 const App = () => {
   const [posts, setPosts] = useState([]);

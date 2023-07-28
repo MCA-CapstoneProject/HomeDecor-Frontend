@@ -26,7 +26,7 @@ export default function Login() {
           </div>
           <div className='flex flex-col text-gray-300 py-2'>
             <label>Password</label>
-            <input className='rounded-lg text-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password"
+            <input className='rounded-lg text-lg bg-gray-700 text-gray-200 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password"
         onChange={(e)=>setPswd(e.target.value)} />
           </div>
           <div className='flex justify-between text-gray-400 py-2 text-lg'>
