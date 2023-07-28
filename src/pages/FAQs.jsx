@@ -1,45 +1,65 @@
 import React from 'react'
-import phoneImage from '../../public/assets/designimages/phone.png'
-import packageImage from '../../public/assets/designimages/package.png'
-import priceImage from '../../public/assets/designimages/price.png'
 import cancelImage from '../../public/assets/designimages/cancel.png'
 import contactImage from '../../public/assets/designimages/contact.png'
 
 function FAQs() {
   return (
     <div>
-      <h1 className='bg-gray-200 p-10 mx-20 mt-10 text-center text-4xl font-semibold'>How Can We Help You?</h1>
+      <h1 className='bg-gray-200 p-10 mx-20 mt-10 text-center text-4xl font-semibold'>Frequently Asked</h1>
       <div>
         <p className='bg-gray-100 p-5 mx-20 my-5'><span className='font-semibold'>Tip:</span> You can order quickly and easily through Decorica.com, We accept and delive orders within India and Slect International locations. For more Information connect with our Customer Agent. You must be at least 13 years old to make a purchase from this site.</p>
       </div>
       <div className='bg-gray-100 p-10 mx-20 mb-5'>
-        <h2 className='text-2xl text-center font-semibold tracking-wider'>Need Help?</h2>
-        <div className='flex justify-around mt-5'>
-          <div className='flex bg-white p-8'>
-              <div className='leading-10'>
-                <p className='font-semibold'>Track Your Order?</p>
+        <h2 className='text-2xl leading-10 font-semibold tracking-wider'>Quick Assists</h2>
+        <p className='leading-10'>Answers to our most frequently asked questions are just one click away.
+For the latest shipping, order, return, and store information, please <a className='hover:text-red-500' href="">click here</a>.</p>
+        <div className='flex gap-10 justify-around text-sm mt-5'>
+          <div className='flex  w-1/3 bg-white p-8'>
+              <div className=''>
+                <p className='font-semibold leading-10 text-xl'>Dispatch & Delivery</p>
+                <p>How do I get free delivery on Decorica.com? <br /> What are Decorica.com's delivery options? <br /> LATEST SHIPPING INFORMATION</p>
                 <a className='text-gray-700 underline hover:text-red-500' href="#">Get Started</a>
-              </div>
-              <div>
-                <img className='h-36 w-44' src={phoneImage} alt="" />
               </div>
           </div>
-          <div className='flex bg-white p-8'>
-              <div className='leading-10 w-48'>
-                <p className='font-semibold'>Make A Return?</p>
+          <div className='flex  w-1/3 bg-white p-8'>
+              <div className=''>
+                <p className='font-semibold leading-10 text-xl'>Returns</p>
+                <p>How do I return my Decorica.com order? <br /> What is Decorica's returns policy? <br /> Where is my refund? <br />
+LATEST RETURN INFORMATION</p>
                 <a className='text-gray-700 underline hover:text-red-500' href="#">Get Started</a>
-              </div>
-              <div>
-                <img className='h-36 w-24' src={packageImage} alt="" />
               </div>
           </div>
-          <div className='flex bg-white p-8'>
-              <div className='leading-10'>
-                <p className='font-semibold'>Request A Price <br /> Adjustment?</p>
+          <div className='flex  w-1/3 bg-white p-8'>
+              <div className=''>
+                <p className='font-semibold leading-10 text-xl'>Decorica Plus</p>
+                <p>What is DecoricaPlus Membership? <br />
+How do I create a Decorica Member profile? <br />
+How do I get the most out of DRC and DTC?</p>
                 <a className='text-gray-700 underline hover:text-red-500' href="#">Get Started</a>
               </div>
-              <div>
-                <img className='h-36 w-48' src={priceImage} alt="" />
+          </div>
+        </div>
+        <div className='flex gap-10 justify-around text-sm mt-5'>
+          <div className='flex w-1/3 bg-white p-8'>
+              <div className=''>
+                <p className='font-semibold leading-10 text-xl'>Orders</p>
+                <p>How do I track my Decorica.com order status? <br /> Can I change or cancel my Decorica.Com order? <br /> Does Decorica offer a student discount? <br /> What payment options can I use on Decorica.com? <br /> LATEST ORDER INFORMATION</p>
+                <a className='text-gray-700 underline hover:text-red-500' href="#">Get Started</a>
+              </div>
+          </div>
+          <div className='flex w-1/3 bg-white p-8'>
+              <div className=''>
+                <p className='font-semibold leading-10 text-xl'>Product Info</p>
+                <p>How do I clean my Decorica frames, artifacts or mirrors? How do I find the right size and fit? <br />
+What is the Decorica By You personalisation policy? <br /> How do I get Decorica's newest Artifacts releases?</p>
+                <a className='text-gray-700 underline hover:text-red-500' href="#">Get Started</a>
+              </div>
+          </div>
+          <div className='flex w-1/3 bg-white p-8'>
+              <div className=''>
+                <p className='font-semibold leading-10 text-xl'>Corporate</p>
+                <p>Where can I learn more about Decorica, Inc.? <br /> Where is the Decorica store closest to me?</p>
+                <a className='text-gray-700 underline hover:text-red-500' href="#">Get Started</a>
               </div>
           </div>
         </div>
