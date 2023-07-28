@@ -5,7 +5,7 @@ import contactImage from '../../public/assets/designimages/contact.png'
 function FAQs() {
   return (
     <div>
-      <h1 className='bg-gray-200 p-10 mx-20 mt-10 text-center text-4xl font-semibold'>Frequently Asked</h1>
+      <h1 className='bg-gray-200 p-10 mx-20 mt-10 text-center text-4xl font-semibold'>Frequently Asked Questions</h1>
       <div>
         <p className='bg-gray-100 p-5 mx-20 my-5'><span className='font-semibold'>Tip:</span> You can order quickly and easily through Decorica.com, We accept and delive orders within India and Slect International locations. For more Information connect with our Customer Agent. You must be at least 13 years old to make a purchase from this site.</p>
       </div>
