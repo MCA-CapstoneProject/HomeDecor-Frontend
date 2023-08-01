@@ -2,67 +2,108 @@ import React from 'react'
 import cancelImage from '../../public/assets/designimages/cancel.png'
 import contactImage from '../../public/assets/designimages/contact.png'
 
+
+
 function FAQs() {
   return (
     <div>
-      <h1 className='bg-gray-200 p-10 mx-20 mt-10 text-center text-4xl font-semibold'>Frequently Asked Questions</h1>
+      <h1 className='bg-gray-200 p-10 mx-20 mt-10 text-center text-4xl font-semibold uppercase select-none'>Frequently Asked Questions</h1>
       <div>
-        <p className='bg-gray-100 p-5 mx-20 my-5'><span className='font-semibold'>Tip:</span> You can order quickly and easily through Decorica.com, We accept and delive orders within India and Slect International locations. For more Information connect with our Customer Agent. You must be at least 13 years old to make a purchase from this site.</p>
+        <p className='bg-gray-100 p-5 mx-20 my-5 text-center select-none'><span className='font-semibold'>Tip:</span> You can order quickly and easily through Decorica.com, We accept and deliver orders within India and Select International locations. For more Information connect with our Customer Agent. You must be at least 13 years old to make a purchase from this site.</p>
       </div>
       <div className='bg-gray-100 p-10 mx-20 mb-5'>
-        <h2 className='text-2xl leading-10 font-semibold tracking-wider'>Quick Assists</h2>
-        <p className='leading-10'>Answers to our most frequently asked questions are just one click away.
+        <h2 className='text-2xl leading-10 font-semibold text-center tracking-wider uppercase select-none underline'>Quick Assists</h2>
+        <p className='leading-10 text-center select-none'>Answers to our most frequently asked questions are just one click away.
 For the latest shipping, order, return, and store information, please <a className='hover:text-red-500' href="">click here</a>.</p>
-        <div className='flex gap-10 justify-around text-sm mt-5'>
-          <div className='flex  w-1/3 bg-white p-8'>
-              <div className=''>
-                <p className='font-semibold leading-10 text-xl'>Dispatch & Delivery</p>
-                <p>How do I get free delivery on Decorica.com? <br /> What are Decorica.com's delivery options? <br /> LATEST SHIPPING INFORMATION</p>
-                <a className='text-gray-700 underline hover:text-red-500' href="#">Get Started</a>
-              </div>
-          </div>
-          <div className='flex  w-1/3 bg-white p-8'>
-              <div className=''>
-                <p className='font-semibold leading-10 text-xl'>Returns</p>
-                <p>How do I return my Decorica.com order? <br /> What is Decorica's returns policy? <br /> Where is my refund? <br />
-LATEST RETURN INFORMATION</p>
-                <a className='text-gray-700 underline hover:text-red-500' href="#">Get Started</a>
-              </div>
-          </div>
-          <div className='flex  w-1/3 bg-white p-8'>
-              <div className=''>
-                <p className='font-semibold leading-10 text-xl'>Decorica Plus</p>
-                <p>What is DecoricaPlus Membership? <br />
-How do I create a Decorica Member profile? <br />
-How do I get the most out of DRC and DTC?</p>
-                <a className='text-gray-700 underline hover:text-red-500' href="#">Get Started</a>
-              </div>
-          </div>
-        </div>
-        <div className='flex gap-10 justify-around text-sm mt-5'>
-          <div className='flex w-1/3 bg-white p-8'>
-              <div className=''>
-                <p className='font-semibold leading-10 text-xl'>Orders</p>
-                <p>How do I track my Decorica.com order status? <br /> Can I change or cancel my Decorica.Com order? <br /> Does Decorica offer a student discount? <br /> What payment options can I use on Decorica.com? <br /> LATEST ORDER INFORMATION</p>
-                <a className='text-gray-700 underline hover:text-red-500' href="#">Get Started</a>
-              </div>
-          </div>
-          <div className='flex w-1/3 bg-white p-8'>
-              <div className=''>
-                <p className='font-semibold leading-10 text-xl'>Product Info</p>
-                <p>How do I clean my Decorica frames, artifacts or mirrors? How do I find the right size and fit? <br />
-What is the Decorica By You personalisation policy? <br /> How do I get Decorica's newest Artifacts releases?</p>
-                <a className='text-gray-700 underline hover:text-red-500' href="#">Get Started</a>
-              </div>
-          </div>
-          <div className='flex w-1/3 bg-white p-8'>
-              <div className=''>
-                <p className='font-semibold leading-10 text-xl'>Corporate</p>
-                <p>Where can I learn more about Decorica, Inc.? <br /> Where is the Decorica store closest to me?</p>
-                <a className='text-gray-700 underline hover:text-red-500' href="#">Get Started</a>
-              </div>
-          </div>
-        </div>
+<div className="max-w-screen-xl mx-auto px-5 bg-white min-h-sceen">
+	<div className="grid divide-y divide-neutral-200 max-w-4xl mx-auto mt-8">
+		<div className="py-5">
+			<details className="group">
+				<summary className="flex justify-between items-center font-medium cursor-pointer list-none">
+					<span className='font-semibold'>What are Decorica's Dispatch & Delivery Options?</span>
+					<span className="transition group-open:rotate-180">
+                <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
+</svg>
+              </span>
+				</summary>
+				<p className="text-neutral-600 mt-3 group-open:animate-fadeIn">
+					 We focus on Dlivering your products on time and with proper Packaging so that the package doesn't gets damaged. We have a special team to look after this section and a special delivery partner which works 24/7 to deliver you products ASAP.
+				</p>
+			</details>
+		</div>
+		<div className="py-5">
+			<details className="group">
+				<summary className="flex justify-between items-center font-medium cursor-pointer list-none">
+					<span className='font-semibold'>How Do I Return a Product?</span>
+					<span className="transition group-open:rotate-180">
+                <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
+</svg>
+              </span>
+				</summary>
+				<p className="text-neutral-600 mt-3 group-open:animate-fadeIn">
+					For returning a product go to your order'ssection, then select the desired product, scroll a bit and you'll find a button saying "Return/Replace" Click on the button and give a suitable reason for the returning of the product. Click return and You're good to go. 
+				</p>
+			</details>
+		</div>
+		<div className="py-5">
+			<details className="group">
+				<summary className="flex justify-between items-center font-medium cursor-pointer list-none">
+					<span className='font-semibold'>How Do I Create a bulk Order?</span>
+					<span className="transition group-open:rotate-180">
+                <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
+</svg>
+              </span>
+				</summary>
+				<p className="text-neutral-600 mt-3 group-open:animate-fadeIn">
+					To create a Bulk Order Click on the "Want a Bulk Order" link beneath the "Add To Cart" button, this will lead you to a new page where you can select the quanit of the poducts in 100s.
+				</p>
+			</details>
+		</div>
+		<div className="py-5">
+			<details className="group">
+				<summary className="flex justify-between items-center font-medium cursor-pointer list-none">
+					<span className='font-semibold'>Where can I get the Product Info?</span>
+					<span className="transition group-open:rotate-180">
+                <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
+</svg>
+              </span>
+				</summary>
+				<p className="text-neutral-600 mt-3 group-open:animate-fadeIn">
+					To get the Product Info you need to click on the Product itself, It will lead you to the Dedicated Products Detail Page where all the Info regarding the poducts are stored.
+				</p>
+			</details>
+		</div>
+		<div className="py-5">
+			<details className="group">
+				<summary className="flex justify-between items-center font-medium cursor-pointer list-none">
+					<span className='font-semibold'>Where can I learn More about Decorica.com</span>
+					<span className="transition group-open:rotate-180">
+                <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
+</svg>
+              </span>
+				</summary>
+				<p className="text-neutral-600 mt-3 group-open:animate-fadeIn">
+					To know more about us click on the About Section availbale on the Menu Section, You can also contact us on the number provided below after this section.
+				</p>
+			</details>
+		</div>
+		<div className="py-5">
+			<details className="group">
+				<summary className="flex justify-between items-center font-medium cursor-pointer list-none">
+					<span className='font-semibold'> Do you offer any discounts or promotions?</span>
+					<span className="transition group-open:rotate-180">
+                <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
+</svg>
+              </span>
+				</summary>
+				<p className="text-neutral-600 mt-3 group-open:animate-fadeIn">
+					We may offer discounts or promotions from time to time. To stay up-to-date on the latest
+					deals and special offers, you can sign up for the company's newsletter or follow it on social media.
+				</p>
+			</details>
+		</div>
+	</div>
+</div>
       </div>
       <div className='flex gap-10 p-10 mx-20 bg-gray-100 mb-10'>
           <div className='flex bg-white w-2/3 p-8'>
@@ -72,7 +113,7 @@ What is the Decorica By You personalisation policy? <br /> How do I get Decorica
                 <a className='text-gray-700 underline hover:text-red-500' href="#">Get Started</a>
               </div>
               <div>
-                <img className='h-48 w-96' src={cancelImage} alt="" />
+                <img src={cancelImage} alt="" />
               </div>
           </div>
           <div className='flex bg-white w-1/3 p-8'>
@@ -89,6 +130,7 @@ What is the Decorica By You personalisation policy? <br /> How do I get Decorica
           </div>
       </div>
     </div>
+    
   )
 }
 
