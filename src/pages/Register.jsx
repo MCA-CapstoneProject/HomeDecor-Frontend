@@ -1,15 +1,42 @@
 import cardImg from "./images/card2.jpg";
-import AuthService from "../services/auth.service";
+import { register } from "../services/auth.service";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { storeAcessPath } from "../helper/Auth.helper";
+import { useSelector } from "react-redux";
+import { authState } from "../features/authenticate/authSlice";
 
 export default function Register() {
   const [email, setEmail] = useState();
   const [pswd, setPswd] = useState();
+  const [cpswd, setCPswd] = useState();
   const [username, setUsername] = useState();
+  const auth = useSelector(authState);
+  
   const handleSubmit = (e) =>{
     e.preventDefault();
-    AuthService.register(username,email,pswd)
+    let pathname= window.location.pathname;
+    if(cpswd === pswd){
+      register(username,email,pswd,pathname,auth.accessPath)
+    }
+    else{
+      //TODO: Replace console.log with toast msg
+      console.log("Password mismatch !!");
+    }
+    
   }
+  const changeUrl = (link) => {
+    var fullUrl = window.location.href;
+    var path = new URL(fullUrl).pathname;
+    var segments = path.split("/");
+    if (segments.length > 1) {
+      segments.pop();
+    }
+    var newPath = segments.join("/");
+    storeAcessPath(newPath.concat(link))
+    return(newPath.concat(link))
+   
+  };
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 m-20 h-3/6 scale-x-75 scale-y-90">
@@ -19,7 +46,7 @@ export default function Register() {
       <div className="bg-gray-800 flex flex-col justify-center">
         <form onSubmit={handleSubmit}
         className="max-w-[480px] w-full mx-auto bg-gray-900 p-8 px-8 rounded-lg">
-          <h2 className="text-4xl dark:text-white font-bold text-center">
+          <h2 className="text-4xl text-white font-bold text-center">
             {" "}
             Register
           </h2>
@@ -52,6 +79,7 @@ export default function Register() {
             <input
               className="rounded-lg text-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
               type="password"
+              onChange={(e) => setCPswd(e.target.value)}
             />
           </div>
 
@@ -59,9 +87,9 @@ export default function Register() {
 
           <p className="text-gray-300 text-lg">
             Already have an Account?{" "}
-            <a className="text-teal-500" href="/login">
+            <Link className="text-teal-500" to={changeUrl("/login")}>
               Sign In
-            </a>
+            </Link>
           </p>
         </form>
       </div>

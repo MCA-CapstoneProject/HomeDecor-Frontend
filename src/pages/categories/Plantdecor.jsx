@@ -66,8 +66,8 @@ const Plantdecor = () => {
                         {plant.map((item, idx) => {
                             return(
                                 <div key={idx} className="w-[18.5rem] flex flex-col justify-between relative transition shadow-md  hover:shadow-xl">
-                                <div className="flex items-center justify-center  ">
-                                    <img src={item.image} width="300rem"   alt="product-image" />
+                                <div className="flex items-center justify-center">
+                                    <img src={item.image} alt="product-image" />
                                 </div>
                                 <div className="p-7">
                                     {/* <span className="block text-xs font-bold uppercase text-stone-300 mb-4">Women,bag</span> */}

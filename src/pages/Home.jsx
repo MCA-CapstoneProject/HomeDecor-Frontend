@@ -8,9 +8,8 @@ import { fetchAccessToken } from "../helper/Auth.helper";
 function Home() {
 
   useEffect(()=>{
-    fetchAccessToken(localStorage.getItem('token'))
-  })
-
+    fetchAccessToken(sessionStorage.getItem('token'))
+  },[])
 
   return (
     <>
@@ -51,32 +50,32 @@ function Home() {
             {/* Categories-Cards */}
             <div className="cards flex justify-center mt-4 gap-12 overflow-hidden">
               <div className="">
-                <a href="#" class="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
-                  <img class="object-fill w-[13rem] h-[13rem] border-solid rounded-full" src="assets/productimages/vase-banner.jpg" alt="" />
+                <a href="#" className="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
+                  <img className="object-fill w-[13rem] h-[13rem] border-solid rounded-full" src="assets/productimages/vase-banner.jpg" alt="" />
                   <p className="text-center pt-2 ">Vases</p>
                 </a>
               </div>
               <div className="">
-                <a href="#" class="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
-                  <img class="object-fill w-[13rem] h-[13rem] border-solid rounded-full" src="assets/productimages/planter-banner.jpg" alt="" />
+                <a href="#" className="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
+                  <img className="object-fill w-[13rem] h-[13rem] border-solid rounded-full" src="assets/productimages/planter-banner.jpg" alt="" />
                   <p className="text-center pt-2 ">Planters</p>
                 </a>
               </div>
               <div className="">
-                <a href="#" class="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
-                  <img class="object-fill w-[13rem] h-[13rem] border-solid rounded-full" src="assets/productimages/lights-banner.jpg" alt="" />
+                <a href="#" className="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
+                  <img className="object-fill w-[13rem] h-[13rem] border-solid rounded-full" src="assets/productimages/lights-banner.jpg" alt="" />
                   <p className="text-center pt-2 ">Lights</p>
                 </a>
               </div>
               <div className="">
-                <a href="#" class="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
-                  <img class="object-fill w-[13rem] h-[13rem] border-solid rounded-full" src="assets/productimages/pframe-banner.jpg" alt="" />
+                <a href="#" className="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
+                  <img className="object-fill w-[13rem] h-[13rem] border-solid rounded-full" src="assets/productimages/pframe-banner.jpg" alt="" />
                   <p className="text-center pt-2 ">Photo Frames</p>
                 </a>
               </div>
               <div className="">
-                <a href="#" class="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
-                  <img class="object-fill w-[13rem] h-[13rem] border-solid rounded-full" src="assets/productimages/mirror-banner.jpg" alt="" />
+                <a href="#" className="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
+                  <img className="object-fill w-[13rem] h-[13rem] border-solid rounded-full" src="assets/productimages/mirror-banner.jpg" alt="" />
                   <p className="text-center pt-2 ">Mirrors</p>
                 </a>
               </div>
@@ -90,24 +89,24 @@ function Home() {
             {/* Categories-Cards */}
             <div className="cards grid grid-cols-3 mt-4 gap-6 overflow-hidden">
               <div className="text-[0.9rem]">
-                <a href="#" class="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
-                  <img class="object-fill w-[24rem] h-[24rem] border-solid"
+                <a href="#" className="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
+                  <img className="object-fill w-[24rem] h-[24rem] border-solid"
                     src="assets/productimages/sculpture-img.jpg" alt="" />
                   <p className="pt-2 ">Sculptural vase</p>
                   <span className=""> 25+ Options, Explore Starting ₹9849 </span>
                 </a>
               </div>
               <div className="text-[0.9rem] ">
-                <a href="#" class="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
-                  <img class="object-fill w-[24rem] h-[24rem] border-solid "
+                <a href="#" className="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
+                  <img className="object-fill w-[24rem] h-[24rem] border-solid "
                     src="assets/productimages/chandelier.jpg" alt="" />
                   <p className=" pt-2 ">Chandeliers</p>
                   <span className=""> 25+ Options, Explore Starting ₹9849 </span>
                 </a>
               </div>
               <div className="text-[0.9rem] ">
-                <a href="#" class="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
-                  <img class="object-fill w-[24rem] h-[24rem] border-solid "
+                <a href="#" className="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
+                  <img className="object-fill w-[24rem] h-[24rem] border-solid "
                     src="assets/productimages/plastic-plant.jpg"
                     alt="" />
                   <p className=" pt-2 ">Plastic Plants Pots</p>
@@ -115,8 +114,8 @@ function Home() {
                 </a>
               </div>
               <div className="text-[0.9rem] ">
-                <a href="#" class="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
-                  <img class="object-fill w-[24rem] h-[24rem] border-solid "
+                <a href="#" className="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
+                  <img className="object-fill w-[24rem] h-[24rem] border-solid "
                     src="assets/productimages/galleryframe.webp"
                     alt="" />
                   <p className=" pt-2 ">Gallery Frame</p>
@@ -124,8 +123,8 @@ function Home() {
                 </a>
               </div>
               <div className="text-[0.9rem] ">
-                <a href="#" class="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
-                  <img class="object-fill w-[24rem] h-[24rem] border-solid "
+                <a href="#" className="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
+                  <img className="object-fill w-[24rem] h-[24rem] border-solid "
                     src="assets/productimages/decorative-light.webp"
                     alt="" />
                   <p className=" pt-2 ">Decorative Mirrors</p>
@@ -133,8 +132,8 @@ function Home() {
                 </a>
               </div>
               <div className="text-[0.9rem] ">
-                <a href="#" class="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
-                  <img class="object-fill w-[24rem] h-[24rem] border-solid "
+                <a href="#" className="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
+                  <img className="object-fill w-[24rem] h-[24rem] border-solid "
                     src="assets/productimages/wall-scone.jpg"
                     alt="" />
                   <p className=" pt-2 ">Wall Scone Lights </p>
@@ -301,41 +300,41 @@ function Home() {
           </div>
           <div className="cards grid grid-cols-6 mt-4 gap-6 overflow-hidden">
             <div className="text-[0.9rem]">
-              <a href="#" class="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
-                <img class="object-fill w-[10rem] h-[10rem] border-solid"
+              <a href="#" className="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
+                <img className="object-fill w-[10rem] h-[10rem] border-solid"
                   src="assets/brandlogos/amara.jpeg" alt="" />
               </a>
             </div>
             <div className="text-[0.9rem] ">
-              <a href="#" class="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
-                <img class="object-fill w-[10rem] h-[10rem] border-solid "
+              <a href="#" className="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
+                <img className="object-fill w-[10rem] h-[10rem] border-solid "
                   src="assets/brandlogos/arc.jpg" alt="" />
               </a>
             </div>
             <div className="text-[0.9rem] ">
-              <a href="#" class="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
-                <img class="object-fill w-[10rem] h-[10rem] border-solid "
+              <a href="#" className="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
+                <img className="object-fill w-[10rem] h-[10rem] border-solid "
                   src="assets/brandlogos/foxhub.jpeg"
                   alt="" />
               </a>
             </div>
             <div className="text-[0.9rem] ">
-              <a href="#" class="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
-                <img class="object-fill w-[10rem] h-[10rem] border-solid "
+              <a href="#" className="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
+                <img className="object-fill w-[10rem] h-[10rem] border-solid "
                   src="assets/brandlogos/aven.jpeg"
                   alt="" />
               </a>
             </div>
             <div className="text-[0.9rem] ">
-              <a href="#" class="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
-                <img class="object-fill w-[10rem] h-[10rem] border-solid "
+              <a href="#" className="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
+                <img className="object-fill w-[10rem] h-[10rem] border-solid "
                   src="assets/brandlogos/hexa.jpeg"
                   alt="" />
               </a>
             </div>
             <div className="text-[0.9rem] ">
-              <a href="#" class="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
-                <img class="object-fill w-[15rem] h-[10rem] border-solid "
+              <a href="#" className="text-[#5b5b5b] font-bold hover:text-[#e57200] hover:font-semibold">
+                <img className="object-fill w-[15rem] h-[10rem] border-solid "
                   src="assets/brandlogos/aven.jpeg"
                   alt="" />
               </a>

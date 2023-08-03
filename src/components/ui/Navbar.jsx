@@ -16,7 +16,7 @@ function Navbar() {
     setActiveLink(path);
   };
   const handleLogout = () =>{
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
     fetchAccessToken(undefined);
   }
 
@@ -54,7 +54,7 @@ function Navbar() {
               {/* WishList,Cart,Profile,*/}
               <div className='flex gap-x-10'>
               <Link
-                    to="/seller-dashboard"
+                    to="/seller-dashboard/login"
                     target="_blank"
                     className="bg-gray-500 text-slate-100 p-2 pt-3 rounded-md font-bold hover:text-white hover:bg-gray-600"
                   >

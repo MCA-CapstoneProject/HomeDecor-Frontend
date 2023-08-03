@@ -54,6 +54,24 @@ const Authentication = () => {
       ):
       <Layout2>
       <Routes>
+      <Route
+          path="/seller-dashboard/login"
+          exact
+          element={
+            <SuspenseWrapper>
+              <Login />
+            </SuspenseWrapper>
+          }
+        />
+         <Route
+          path="/seller-dashboard/Register"
+          exact
+          element={
+            <SuspenseWrapper>
+              <Register />
+            </SuspenseWrapper>
+          }
+        />
         <Route
           path="/seller-dashboard"
           exact
