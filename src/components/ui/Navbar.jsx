@@ -54,12 +54,19 @@ function Navbar() {
               {/* WishList,Cart,Profile,*/}
               <div className='flex gap-x-10'>
               <Link
+                  to="/admin-dashboard"
+                  target="_blank"
+                  className="bg-gray-500 text-slate-100 p-2 pt-3 rounded-md font-bold hover:text-white hover:bg-gray-600"
+                >
+                  Admin
+                </Link>
+              <Link
                     to="/seller-dashboard/login"
                     target="_blank"
                     className="bg-gray-500 text-slate-100 p-2 pt-3 rounded-md font-bold hover:text-white hover:bg-gray-600"
                   >
                    Become a seller
-                  </Link>
+              </Link>
               <div className="flex gap-x-6">
                 <Link key="1" to="/wishlist"
                   className={` font-thin text-black hover:text-gray-500 

@@ -1,5 +1,5 @@
 import { Auth0Provider } from "@auth0/auth0-react";
-import { usePublicRoutes } from "./helper/PublicRoute";
+import { useAdminRoutes, usePublicRoutes } from "./helper/PublicRoute";
 import Layout from "./components/ui/Layout";
 import Layout2 from "./components/ui/seller/Layout2";
 import { Routes,  Route  } from "react-router-dom";
@@ -13,6 +13,14 @@ import AddProduct from "./pages/seller/AddProduct";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Plantdecor from "./pages/categories/Plantdecor";
+import Adminlayout from "./components/ui/admin/Adminlayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import ProductsList from "./pages/admin/ProductsList";
+import SellersList from "./pages/admin/SellersList";
+import CustomersList from "./pages/admin/CustomersList";
+import OrdersList from "./pages/admin/OrdersList";
+import AddUserForm from "./pages/admin/AddUserForm";
+import ViewUser from "./pages/admin/ViewUser";
 
 const Authentication = () => {
   const domain = "dev-72e1ark1yfj8hz53.us.auth0.com";
@@ -20,9 +28,11 @@ const Authentication = () => {
   //const audience = 'YOUR_AUTH0_API_IDENTIFIER';
   const redirectUri = window.location.origin;
   const isPublicRoute = usePublicRoutes();
+  const isAdminRoute = useAdminRoutes();
+
   return (
     <>
-      {!isPublicRoute ? (
+      {!isPublicRoute && !isAdminRoute  ? (
         <Auth0Provider
           domain={domain}
           clientId={clientId}
@@ -51,7 +61,57 @@ const Authentication = () => {
             </Routes>
           </Layout>
         </Auth0Provider>
-      ):
+      ):isAdminRoute ? (
+        <Adminlayout>
+        <Routes>
+          <Route
+            path="/admin-dashboard"
+            exact
+            element={
+              <SuspenseWrapper>
+                <AdminDashboard />
+              </SuspenseWrapper>
+            }
+          />
+          <Route
+            path="/admin-dashboard/sellers"
+            element={
+              <SuspenseWrapper>
+                <SellersList/>
+              </SuspenseWrapper>
+            }
+          />
+          <Route
+            path="/admin-dashboard/customers"
+            element={
+              <SuspenseWrapper>
+                <CustomersList/>
+              </SuspenseWrapper>
+            }
+          />
+          <Route
+            path="/admin-dashboard/products"
+            exact
+            element={
+              <SuspenseWrapper>
+                <ProductsList/>
+              </SuspenseWrapper>
+            }
+          />
+          <Route
+            path="/admin-dashboard/orders"
+            exact
+            element={
+              <SuspenseWrapper>
+                <OrdersList/>
+              </SuspenseWrapper>
+            }
+          />
+          <Route path="/admin-dashboard/adduser" exact element={<AddUserForm/>} />
+          <Route path="/admin-dashboard/viewuser/:userId" exact element={<ViewUser/>} />
+        </Routes>
+      </Adminlayout>
+      ):(
       <Layout2>
       <Routes>
       <Route
@@ -108,7 +168,7 @@ const Authentication = () => {
         />
       </Routes>
     </Layout2>
-      }
+     ) }
     </>
   );
 };
