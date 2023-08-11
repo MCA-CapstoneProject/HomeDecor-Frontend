@@ -12,7 +12,4 @@ export const ROUTES_ARR = [
     { name: "Shop", component: Shop, path: "/shop" },
     { name: "Blog", component: Blog, path: "/blog" },
     { name: "FAQs", component: FAQs, path: "/faqs" },
-    // { name: "Login", component: Login, path: "/login" },
-
-    // { name: "Products", component: Products, path: "/products" },
 ]

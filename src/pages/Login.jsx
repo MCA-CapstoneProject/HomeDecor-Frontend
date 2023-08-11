@@ -71,7 +71,7 @@ export default function Login() {
 
           <p className="text-gray-300 text-lg">
             Don&apos;t Have an Account?{" "}
-            <Link className="text-teal-500" to={changeUrl("/register")}>
+            <Link className="text-teal-500" to={changeUrl("/Register")}>
               Register Now!!!
             </Link>
           </p>

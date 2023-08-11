@@ -1,10 +1,4 @@
-import React from "react";
-import { Link, Routes, Route } from "react-router-dom";
-import Shop from "../../../pages/Shop";
-import SellerDashboard from "../../../pages/seller/SellerDashboard";
-import SuspenseWrapper from "../../../lib/utils/routing/SuspenseWrapper";
-import AddProduct from "../../../pages/seller/AddProduct";
-import Layout2 from "./Layout2";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   return (
@@ -13,7 +7,7 @@ export default function Sidebar() {
       <div className="flex-shrink-0 flex items-center">
         {/* <span className="text-xl font-bold">Logo</span> */}
         <img
-          class="object-fill w-[13rem] h-28"
+          className="object-fill w-[13rem] h-28"
           src="assets/logo.png"
           alt="website-logo"
         />
@@ -31,15 +25,15 @@ export default function Sidebar() {
             stroke="currentColor"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"
             />
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"
             />
           </svg>
@@ -49,7 +43,7 @@ export default function Sidebar() {
 
         <Link
           className="flex items-center px-6 py-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-          to="/shop"
+          to="/seller-dashboard/shop"
         >
           <svg
             className="w-6 h-6"
@@ -59,9 +53,9 @@ export default function Sidebar() {
             stroke="currentColor"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"
             />
           </svg>
@@ -81,9 +75,9 @@ export default function Sidebar() {
             stroke="currentColor"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
             />
           </svg>
@@ -95,16 +89,16 @@ export default function Sidebar() {
           class="flex items-center px-6 py-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
         >
           <svg
-            class="w-6 h-6"
+            className="w-6 h-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
             ></path>
           </svg>
@@ -116,16 +110,16 @@ export default function Sidebar() {
           class="flex items-center px-6 py-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
         >
           <svg
-            class="w-6 h-6"
+            className="w-6 h-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
             ></path>
           </svg>

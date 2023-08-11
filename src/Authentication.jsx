@@ -2,7 +2,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { useAdminRoutes, usePublicRoutes } from "./helper/PublicRoute";
 import Layout from "./components/ui/Layout";
 import Layout2 from "./components/ui/seller/Layout2";
-import { Routes,  Route  } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { ROUTES_ARR } from "./constants/routes.constants";
 import SuspenseWrapper from "./lib/utils/routing/SuspenseWrapper";
 import NotFound from "./pages/NotFound";
@@ -21,6 +21,7 @@ import CustomersList from "./pages/admin/CustomersList";
 import OrdersList from "./pages/admin/OrdersList";
 import AddUserForm from "./pages/admin/AddUserForm";
 import ViewUser from "./pages/admin/ViewUser";
+import Profile from "./pages/seller/Profile";
 
 const Authentication = () => {
   const domain = "dev-72e1ark1yfj8hz53.us.auth0.com";
@@ -32,143 +33,168 @@ const Authentication = () => {
 
   return (
     <>
-      {!isPublicRoute && !isAdminRoute  ? (
+      {!isPublicRoute && !isAdminRoute ? (
         <Auth0Provider
           domain={domain}
           clientId={clientId}
           redirectUri={redirectUri}
           //  audience={audience}
         >
-          <Layout>
+          {(window.location.pathname.includes("/login") || window.location.pathname.includes("/Register")) ? (
             <Routes>
-              {ROUTES_ARR.map((item, idx) => (
+              <Route path="/login" exact element={<Login />} />
+              <Route path="/Register" exact element={<Register />} />
+            </Routes>
+          ) : (
+            <Layout>
+              <Routes>
+                {ROUTES_ARR.map((item, idx) => (
+                  <Route
+                    key={idx}
+                    path={item.path}
+                    element={
+                      <SuspenseWrapper>
+                        <item.component />
+                      </SuspenseWrapper>
+                    }
+                  />
+                ))}
+                <Route element={NotFound} />
+                <Route path="/wishlist" exact element={<Wishlist />} />
+                <Route path="/cart" exact element={<Cart />} />
                 <Route
-                  key={idx}
-                  path={item.path}
+                  path="/shop/plant-decor"
+                  exact
+                  element={<Plantdecor />}
+                />
+              </Routes>
+            </Layout>
+          )}
+        </Auth0Provider>
+      ) : isAdminRoute ? (
+        <Adminlayout>
+          <Routes>
+            <Route
+              path="/admin-dashboard"
+              exact
+              element={
+                <SuspenseWrapper>
+                  <AdminDashboard />
+                </SuspenseWrapper>
+              }
+            />
+            <Route
+              path="/admin-dashboard/sellers"
+              element={
+                <SuspenseWrapper>
+                  <SellersList />
+                </SuspenseWrapper>
+              }
+            />
+            <Route
+              path="/admin-dashboard/customers"
+              element={
+                <SuspenseWrapper>
+                  <CustomersList />
+                </SuspenseWrapper>
+              }
+            />
+            <Route
+              path="/admin-dashboard/products"
+              exact
+              element={
+                <SuspenseWrapper>
+                  <ProductsList />
+                </SuspenseWrapper>
+              }
+            />
+            <Route
+              path="/admin-dashboard/orders"
+              exact
+              element={
+                <SuspenseWrapper>
+                  <OrdersList />
+                </SuspenseWrapper>
+              }
+            />
+            <Route
+              path="/admin-dashboard/adduser"
+              exact
+              element={<AddUserForm />}
+            />
+            <Route
+              path="/admin-dashboard/viewuser/:userId"
+              exact
+              element={<ViewUser />}
+            />
+          </Routes>
+        </Adminlayout>
+      ) : (
+        <>
+          {(window.location.pathname.includes("/seller-dashboard/login") || window.location.pathname.includes("/seller-dashboard/Register")) ? (
+            <Routes>
+              <Route
+                path="/seller-dashboard/login"
+                exact
+                element={
+                  <SuspenseWrapper>
+                    <Login />
+                  </SuspenseWrapper>
+                }
+              />
+              <Route
+                path="/seller-dashboard/Register"
+                exact
+                element={
+                  <SuspenseWrapper>
+                    <Register />
+                  </SuspenseWrapper>
+                }
+              />
+            </Routes>
+          ) : (
+            <Layout2>
+              <Routes>
+                <Route
+                  path="/seller-dashboard"
+                  exact
                   element={
                     <SuspenseWrapper>
-                      <item.component />
+                      <SellerDashboard />
                     </SuspenseWrapper>
                   }
                 />
-              ))}
-              <Route element={NotFound} />
-              <Route path="/wishlist" exact element={<Wishlist />} />
-              <Route path="/cart" exact element={<Cart />} />
-              <Route path="/login" exact element={<Login />} />
-              <Route path="/Register" exact element={<Register />} />
-              <Route path="/shop/plant-decor" exact element={<Plantdecor />} />
-            </Routes>
-          </Layout>
-        </Auth0Provider>
-      ):isAdminRoute ? (
-        <Adminlayout>
-        <Routes>
-          <Route
-            path="/admin-dashboard"
-            exact
-            element={
-              <SuspenseWrapper>
-                <AdminDashboard />
-              </SuspenseWrapper>
-            }
-          />
-          <Route
-            path="/admin-dashboard/sellers"
-            element={
-              <SuspenseWrapper>
-                <SellersList/>
-              </SuspenseWrapper>
-            }
-          />
-          <Route
-            path="/admin-dashboard/customers"
-            element={
-              <SuspenseWrapper>
-                <CustomersList/>
-              </SuspenseWrapper>
-            }
-          />
-          <Route
-            path="/admin-dashboard/products"
-            exact
-            element={
-              <SuspenseWrapper>
-                <ProductsList/>
-              </SuspenseWrapper>
-            }
-          />
-          <Route
-            path="/admin-dashboard/orders"
-            exact
-            element={
-              <SuspenseWrapper>
-                <OrdersList/>
-              </SuspenseWrapper>
-            }
-          />
-          <Route path="/admin-dashboard/adduser" exact element={<AddUserForm/>} />
-          <Route path="/admin-dashboard/viewuser/:userId" exact element={<ViewUser/>} />
-        </Routes>
-      </Adminlayout>
-      ):(
-      <Layout2>
-      <Routes>
-      <Route
-          path="/seller-dashboard/login"
-          exact
-          element={
-            <SuspenseWrapper>
-              <Login />
-            </SuspenseWrapper>
-          }
-        />
-         <Route
-          path="/seller-dashboard/Register"
-          exact
-          element={
-            <SuspenseWrapper>
-              <Register />
-            </SuspenseWrapper>
-          }
-        />
-        <Route
-          path="/seller-dashboard"
-          exact
-          element={
-            <SuspenseWrapper>
-              <SellerDashboard />
-            </SuspenseWrapper>
-          }
-        />
-        <Route
-          path="/seller-dashboard/shop"
-          element={
-            <SuspenseWrapper>
-            
-            </SuspenseWrapper>
-          }
-        />
-        <Route
-          path="/seller-dashboard/add-product"
-          element={
-            <SuspenseWrapper>
-              <AddProduct />
-            </SuspenseWrapper>
-          }
-        />
-        <Route
-          path="/seller-dashboard/profile"
-          exact
-          element={
-            <SuspenseWrapper>
-              <h1>PROFILE OF SELLER</h1>
-            </SuspenseWrapper>
-          }
-        />
-      </Routes>
-    </Layout2>
-     ) }
+                <Route
+                  path="/seller-dashboard/shop"
+                  element={
+                    <SuspenseWrapper>
+                      <ProductsList />
+                    </SuspenseWrapper>
+                  }
+                />
+                <Route
+                  path="/seller-dashboard/add-product"
+                  element={
+                    <SuspenseWrapper>
+                      <AddProduct />
+                    </SuspenseWrapper>
+                  }
+                />
+                <Route
+                  path="/seller-dashboard/profile"
+                  exact
+                  element={
+                    <SuspenseWrapper>
+                      <h1>PROFILE OF SELLER</h1>
+                      <Profile/>
+                    </SuspenseWrapper>
+                  }
+                />
+              </Routes>
+            </Layout2>
+          )}
+        </>
+      )}
     </>
   );
 };
