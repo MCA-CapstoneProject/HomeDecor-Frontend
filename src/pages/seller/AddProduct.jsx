@@ -49,41 +49,44 @@ function AddProduct() {
         setbase64Image(null);
     }
   }
-
   return (
-    <div className="flex h-screen items-center justify-center">
-      <form ref={formRef} onSubmit={handleSubmit} className="grid w-2/5">
+    <>
+    <div className="head items-center text-gray-300 px-10 bg-[#34495E] select-none h-36 rounded-2xl mx-auto shadow-xl">
+      <h1 className='text-3xl pt-8'>Hello Seller, Want To Add Some Products?</h1>
+      <p className='text-lg py-4'>Well Go Ahead, Add the Details and Images of the Product and Click on the Submit Button to Apply the Changes. </p>
+    </div>
+    <div className="container mx-auto mt-10 w-[500px] h-auto rounded-2xl shadow-2xl">
+    <form ref={formRef} onSubmit={handleSubmit} className="grid w-2/5 px-16 py-10">
       <input name="prod_code"
-          className="outline-none border-b-2 text-gray-500"
+          className="outline-none bg-transparent border-b-2 text-[#111]"
           type="text"
           placeholder="Enter Product Code"
         />
 
         <input name="prod_name"
-          className="outline-none mt-8 border-b-2 text-gray-500"
+          className="outline-none bg-transparent mt-8 border-b-2 text-[#111]"
           type="text"
           placeholder="Enter Product Name"
         />
         <input name="prod_desc"
-          className="outline-none border-b-2 mt-8 text-gray-500"
+          className="outline-none bg-transparent border-b-2 mt-8 text-[#111]"
           type="textarea"
           placeholder="Enter Product Details"
         />
         <span className="flex justify-between">
         <input name="prod_rating"
-          className="outline-none border-b-2 mt-8 text-gray-500"
+          className="outline-none bg-transparent w-[400px] border-b-2 mt-8 text-[#111]"
           type="text"
           placeholder="Enter Ratings from(1-5)"
         />
-        <div className="text-gray-500 mt-8 border-b-2">
+        </span>
+        <span>
         <input name="prod_price"
-          className="outline-none mt-8 border-b-2 text-gray-500"
+          className="outline-none bg-transparent w-[400px] mt-8 border-b-2 text-gray-500"
           type="text"
           placeholder="Enter Product Price"
         />
-        </div>
         </span>
-        <span className="flex justify-between">
         <select  name="prod_category" className="form-select outline-none text-gray-400 border-b-2 mt-8">
         <option selected value="0">
             Enter Category Name
@@ -104,8 +107,6 @@ function AddProduct() {
           <option value="8">fhiugr</option>
           <option value="9">kakndu</option>
         </select>
-        </span>
-        <span className="flex justify-between">
         <select name="prod_quantity" className="form-select outline-none text-gray-400 border-b-2 mt-8">
           <option selected value="0">
             Enter Quantity
@@ -125,20 +126,20 @@ function AddProduct() {
           <option value="large">Large</option>
           <option value="extra-large">Extra Large</option>
         </select>
-        </span>
+        
          <input
-            className="outline-none border-b-2 mt-8 text-gray-500"
+            className="outline-none border-b-2 mt-8 bg-transparent text-gray-400"
             id="dropzone-file"
             type="file"
             accept="image/*"
             onChange={handleFileChange}
           />
-          <img src={base64Image} alt="Upload right format of image to display here..."/>
-        <br/><br/>
-        <button className="bg-emerald-500 my-8 text-lg rounded-xl float-right px-10 py-2" type="Submit" value="submit">Submit</button>
-      </form> 
+          <img className="mt-8" src={base64Image} alt="Upload right format of image to display here..."/>
+        <button className="bg-emerald-500 my-8 text-lg text-white border-2 border-emerald-500 hover:bg-white hover:text-emerald-500 float-right px-10 py-2" type="Submit" value="submit">Submit</button>
+      </form>
     </div>
-  );
+    </>
+  )
 }
 
-export default AddProduct;
+export default AddProduct
