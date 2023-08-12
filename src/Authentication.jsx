@@ -22,7 +22,7 @@ import OrdersList from "./pages/admin/OrdersList";
 import AddUserForm from "./pages/admin/AddUserForm";
 import ViewUser from "./pages/admin/ViewUser";
 import Profile from "./pages/seller/Profile";
-
+import UserProfile from './pages/Profile'
 
 const Authentication = () => {
   const domain = "dev-72e1ark1yfj8hz53.us.auth0.com";
@@ -61,14 +61,15 @@ const Authentication = () => {
                   />
                 ))}
                 <Route element={NotFound} />
-                <Route path="/wishlist" exact element={<Wishlist />} />
+                <Route path="/profile" exact element={<UserProfile />} />
+              <Route path="/wishlist" exact element={<Wishlist />} />
                 <Route path="/cart" exact element={<Cart />} />
                 <Route
                   path="/shop/plant-decor"
                   exact
                   element={<Plantdecor />}
                 />
-                <Route path="/profile" exact element={<Profile/>} />
+                {/* <Route path="/profile" exact element={<UserProfile/>} /> */}
             </Routes>
             </Layout>
           )}

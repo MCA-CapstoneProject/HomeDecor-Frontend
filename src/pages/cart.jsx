@@ -1,5 +1,7 @@
+import React, {useState} from "react";
 
 export default function cart() {
+  const [amount, setAmount] = useState(1);
   return (
     <>
     
@@ -16,28 +18,19 @@ export default function cart() {
                         <div className=' h-48 w-48 m-5'>
                           <img src="../assets/productimages/wall-mirror.jpg" alt="product-image" />
                         </div>
-                        <div className='ml-5 text-sm'>Enter PIN Code for Delivery <br />
-                                              Details 
-                        </div>
-                        <div>
-                        <button className='bg-teal-400 text-white ml-5 mt-2 p-2 w-48 border-teal-400 text-center hover:text-teal-400 hover:bg-white border-2 '>Move to Wishlist</button> 
-                        </div>
-                        <div> 
-                        <button className='bg-red-400 text-white ml-5 mb-5 mt-2 p-2 text-center w-48 hover:text-red-400 hover:bg-white border-red-400 border-2'>Delete</button>
-                        </div>
+                        
                         
                     </div>
                 
                         <div className='mt-5'>
                                 <p>Sculpted Wall Mirror</p>
                                 <p className='text-slate-400'>By MegaArts from Decorica</p>
-                                <p className='border-2 w-24 mt-4 p-2'>QTY <select className='p-1' name="" id="">
-                                  <option value="1"> 1</option>
-                                  <option value="2"> 2</option>
-                                  <option value="3"> 3</option>
-                                  <option value="4"> 4</option>
-                                </select></p>
-                                <div className='flex '>
+                                <div className='flex flex-row items-center'>
+                                        <button className='bg-gray-200 px-3 rounded-lg text-violet-800 text-3xl' onClick={() => setAmount((prev) => prev - 1)}>-</button>
+                                        <span className='py-4 px-6 rounded-lg'>{amount}</span>
+                                        <button className='bg-gray-200 px-3 rounded-lg text-violet-800 text-3xl' onClick={() => setAmount((prev) => prev + 1)}>+</button>
+                                    </div>
+                                {/* <div className='flex '>
                                 <div>
                                 <div className='mt-4'>MRP</div>
                                 <div className='text-green-600 mb-2'>Item Discount</div>
@@ -48,19 +41,27 @@ export default function cart() {
                                 <div className='text-green-600 mb-2'>$300</div>
                                 <div className='font-semibold border-black border-t-2'>$999</div>
                                 </div>
+                                </div> */}
+                                <div className="flex my-8">
+                                <div>
+                                <button className='bg-teal-400 text-white ml-5 mt-2 p-2 w-30 border-teal-400 text-center hover:text-teal-400 hover:bg-white border-2 '>Move to Wishlist</button> 
+                                </div>
+                                <div>
+                                <button className='bg-red-400 text-white ml-5 mb-5 mt-2 p-2 text-center w-30 hover:text-red-400 hover:bg-white border-red-400 border-2'>Delete</button>
+                                </div>
                                 </div>
                         </div>
                   </div> 
               </div>
               <div className='ml-5 w-2/5 h-auto float-right'>
-                  <div>
+                  {/* <div>
                     Delivering To <br />
                     <input className='border-2 w-[500px] h-12 mt-3 pl-4 outline-none' type="text " placeholder='Enter PIN Code' maxLength={6} />
-                  </div>
+                  </div> */}
                   {/* <div>
                   <input className='border-2 w-[500px] h-12 mt-3 outline-none pl-4 uppercase' placeholder='Apply Coupon' type="text " maxLength={6} />
                   </div> */}
-                  <div className='border-2 mt-3 w-[500px] h-auto'>
+                  <div className='border-2 w-[500px] h-auto'>
                     <h1 className='font-semibold text-center text-xl mt-3'>Cart Summary</h1>
                     <div className='flex'>
                                 <div className='ml-3'>
@@ -78,7 +79,7 @@ export default function cart() {
                                 </div>
                                 
                   </div>
-                  <button className='bg-red-400 w-[500px] text-white font-bold uppercase mt-3 p-5'>Proceed To Pay</button>
+                  <button className='bg-red-400 w-[500px] border-2 border-red-400 text-white font-bold uppercase mt-3 p-5 hover:bg-transparent hover:text-[#111]'>Proceed To Checkout</button>
               </div>
       </div>
       

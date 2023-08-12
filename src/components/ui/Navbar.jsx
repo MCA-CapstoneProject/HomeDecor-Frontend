@@ -28,8 +28,8 @@ function Navbar() {
             <div className="flex-1 flex items-center justify-between">
               <div className="flex-shrink-0 flex items-center">
                 {/* <span className="text-xl font-bold">Logo</span> */}
-                <img className="object-fill w-[13rem]"
-                  src="assets/logo.png" alt="website-logo" />
+                <a href="/"><img className="object-fill w-[13rem]"
+                  src="assets/logo.png" alt="website-logo" /></a>
               </div>
               {/* Pages */}
               <div className="hidden sm:block sm:ml-6">
@@ -85,7 +85,7 @@ function Navbar() {
 
                 {/*Profile */}
                 <Link
-                  key=""
+                  key="3"
                   to="/profile"
                   className={` font-thin text-black hover:text-gray-500 hover:font-semibold py-2 uppercase`}
                   // onClick={() => handleLinkClick(item.path)}
