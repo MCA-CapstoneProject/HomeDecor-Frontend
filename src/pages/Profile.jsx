@@ -14,7 +14,7 @@ function Profile() {
 
   return (
     <>
-    <div className="banner flex items-center text-gray-300 px-10 bg-[#34495E] select-none mt-10 h-48 rounded-2xl mx-10 shadow-2xl">
+    <div className="banner ">
       <h1 className='text-4xl'>Hello User, Welcome Back</h1>
     </div>
     <div className="personal-info flex px-10 bg-white text-lg mx-10 rounded-2xl shadow-2xl py-10 mt-10">
