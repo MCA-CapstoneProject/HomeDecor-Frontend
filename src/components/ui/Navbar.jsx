@@ -83,9 +83,10 @@ function Navbar() {
                   {/* Cart */}
                 </Link>
 
+                {/*Profile */}
                 <Link
                   key=""
-                  to=""
+                  to="/profile"
                   className={` font-thin text-black hover:text-gray-500 hover:font-semibold py-2 uppercase`}
                   // onClick={() => handleLinkClick(item.path)}
                 >
@@ -94,7 +95,6 @@ function Navbar() {
                    text-gray-500 hover:text-gray-600 transition-colors"
                     icon={faUserCircle}
                   />
-                  {/*Profile */}
                 </Link>
                 
                   <Link

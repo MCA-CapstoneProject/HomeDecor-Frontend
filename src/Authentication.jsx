@@ -23,6 +23,7 @@ import AddUserForm from "./pages/admin/AddUserForm";
 import ViewUser from "./pages/admin/ViewUser";
 import Profile from "./pages/seller/Profile";
 
+
 const Authentication = () => {
   const domain = "dev-72e1ark1yfj8hz53.us.auth0.com";
   const clientId = "aOghGIpqsYAVtv3HzCXATZXXDBgWMJGn";
@@ -67,7 +68,8 @@ const Authentication = () => {
                   exact
                   element={<Plantdecor />}
                 />
-              </Routes>
+                <Route path="/profile" exact element={<Profile/>} />
+            </Routes>
             </Layout>
           )}
         </Auth0Provider>

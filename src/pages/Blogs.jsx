@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faCalendar, faHandsHelping } from "@fortawesome/fontawesome-free-solid";
+import { faArrowRight } from "@fortawesome/fontawesome-free-solid";
 
 function Blogs() {
   return (
