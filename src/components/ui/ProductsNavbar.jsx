@@ -21,14 +21,14 @@ const ProductsNavbar = () => {
                   </li>
                 </Link>
                 {/* <!-- Features link --> */}
-                <Link to="/shop/frames">
+                <Link to="/shop/arts-frame">
                   <li className="">
                     <a className="duration-150 border-b-[3px] border-transparent hover:border-[#c66b16]">
                       Art and Frames</a>
                   </li>
                 </Link>
                 {/* <!-- Pricing link --> */}
-                <Link to="/shop/lights">
+                <Link to="/shop/interior-lights">
                   <li className="">
                     <a className="duration-150 border-b-[3px] border-transparent hover:border-[#c66b16]">
                       Interior Lightings</a>
@@ -39,7 +39,7 @@ const ProductsNavbar = () => {
                     <a className="duration-150 border-b-[3px] border-transparent hover:border-[#c66b16]" aria-current="page">Mirrors</a>
                   </li>
                 </Link>
-                <Link to="/shop/showpiece">
+                <Link to="/shop/showpieces">
                   <li className="" data-te-nav-item-ref>
                     <a className="duration-150 border-b-[3px] border-transparent hover:border-[#c66b16]" aria-current="page">ShowPieces</a>
                   </li>

@@ -1,11 +1,15 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingBag } from "@fortawesome/fontawesome-free-solid";
 import { faHeart, faUserCircle, } from "@fortawesome/fontawesome-free-regular";
 import  {plant, Art, Lights, Mirrors, Showpieces } from "../constants/products.constants"
 
+
 const Products = () => {
+
+
+
     return (
         <>
             <div className=''>

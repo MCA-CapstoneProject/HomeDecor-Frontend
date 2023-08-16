@@ -11,6 +11,8 @@ async function login(usernameOrEmail, password) {
         sessionStorage.setItem("token", JSON.stringify(response.data.token));
         sessionStorage.setItem("uname", JSON.stringify(response.data.userName));
         sessionStorage.setItem("role", JSON.stringify(response.data.roleName));
+        sessionStorage.setItem("userId", JSON.stringify(response.data.userId));
+  
         let path = window.location.pathname;
         let redirect = path.includes("seller") ? "/seller-dashboard" : path.includes("admin") ? "/admin" : "/";
         handleClick("success", "Logged In Successfully");

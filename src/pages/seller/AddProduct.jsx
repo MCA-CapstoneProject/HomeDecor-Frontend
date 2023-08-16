@@ -5,7 +5,7 @@ import { getHeaders } from "../../../config";
 function AddProduct() {
   const formRef = useRef(null);
   const [base64Image, setbase64Image] = useState("");
-  const apiUrl = "http://localhost:8082/secured/product/add";
+  const apiUrl = "http://localhost:8082/product/add";
 
   const handleFileChange = (event) => {
     const reader = new FileReader();
@@ -28,10 +28,16 @@ function AddProduct() {
       "imagePath" :base64Image,
       "quantity" : formData.get("prod_quantity"),
       "size" : formData.get("prod_size"),
-      "brandId": {
+      // "brandId": {
+      //   "brandId": formData.get("prod_brand")
+      // },
+      // "categoryId": {
+      //   "categoryId": formData.get("prod_category")
+      // }
+      "brandDto": {
         "brandId": formData.get("prod_brand")
       },
-      "categoryId": {
+      "categoryDto": {
         "categoryId": formData.get("prod_category")
       }
     }
@@ -39,6 +45,7 @@ function AddProduct() {
       .post(apiUrl, payload, getHeaders())
       .then((response) => {
         console.log("Response:", response.data);
+        console.log('brand-id category-');
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -101,11 +108,11 @@ function AddProduct() {
           <option selected value="0">
             Enter Brand Name
           </option>
-          <option value="3">vdjvh</option>
-          <option value="4">veach</option>
-          <option value="7">dbvh</option>
-          <option value="8">fhiugr</option>
-          <option value="9">kakndu</option>
+          <option value="1">Essence</option>
+          <option value="2">Symphony</option>
+          <option value="3">Gaze</option>
+          <option value="4">Verdant</option>
+          <option value="5">Bloom</option>
         </select>
         <select name="prod_quantity" className="form-select outline-none text-gray-400 border-b-2 mt-8">
           <option selected value="0">

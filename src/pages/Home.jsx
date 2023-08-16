@@ -3,12 +3,13 @@ import { faArrowRight } from "@fortawesome/fontawesome-free-solid";
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { useEffect } from "react";
-import { fetchAccessToken } from "../helper/Auth.helper";
+import { fetchAccessToken, storeUserId } from "../helper/Auth.helper";
 
 function Home() {
 
   useEffect(()=>{
     fetchAccessToken(sessionStorage.getItem('token'))
+    storeUserId(sessionStorage.getItem("userId"));
   },[])
 
   return (

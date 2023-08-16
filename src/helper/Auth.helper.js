@@ -1,5 +1,5 @@
 import { store } from "../app/store";
-import { setAccessPath, setAccessToken, setUsername } from "../features/authenticate/authSlice";
+import { setAccessPath, setAccessToken, setUsername,setUserId } from "../features/authenticate/authSlice";
 
 
 export function SetAuthUsername(username){
@@ -12,4 +12,7 @@ export function fetchAccessToken(token){
 
 export function storeAcessPath(path){
     store.dispatch(setAccessPath(path))
+}
+export function storeUserId(userid){
+    store.dispatch(setUserId(userid))
 }

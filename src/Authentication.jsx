@@ -13,6 +13,7 @@ import AddProduct from "./pages/seller/AddProduct";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Plantdecor from "./pages/categories/Plantdecor";
+import Artsframes from "./pages/categories/Artsframes";
 import Adminlayout from "./components/ui/admin/Adminlayout";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import ProductsList from "./pages/admin/ProductsList";
@@ -22,7 +23,11 @@ import OrdersList from "./pages/admin/OrdersList";
 import AddUserForm from "./pages/admin/AddUserForm";
 import ViewUser from "./pages/admin/ViewUser";
 import Profile from "./pages/seller/Profile";
-import UserProfile from './pages/Profile'
+import UserProfile from './pages/Profile';
+import ProductCard from "./pages/ProductCard";
+import Interiorlights from "./pages/categories/Interiorlights";
+import Mirrors from "./pages/categories/Mirrors";
+import Showpieces from "./pages/categories/Showpieces";
 
 const Authentication = () => {
   const domain = "dev-72e1ark1yfj8hz53.us.auth0.com";
@@ -39,7 +44,7 @@ const Authentication = () => {
           domain={domain}
           clientId={clientId}
           redirectUri={redirectUri}
-          //  audience={audience}
+        //  audience={audience}
         >
           {(window.location.pathname.includes("/login") || window.location.pathname.includes("/Register")) ? (
             <Routes>
@@ -62,15 +67,17 @@ const Authentication = () => {
                 ))}
                 <Route element={NotFound} />
                 <Route path="/profile" exact element={<UserProfile />} />
-              <Route path="/wishlist" exact element={<Wishlist />} />
+                <Route path="/wishlist" exact element={<Wishlist />} />
                 <Route path="/cart" exact element={<Cart />} />
-                <Route
-                  path="/shop/plant-decor"
-                  exact
-                  element={<Plantdecor />}
-                />
+                <Route path="/singleproduct/:productid" element={<ProductCard />} />
+                {/* Categories Routing */}
+                <Route path="/shop/plant-decor" exact element={<Plantdecor />}/>
+                <Route path="/shop/arts-frame" exact element={<Artsframes />} />
+                <Route path="/shop/interior-lights" exact element={<Interiorlights/>} />
+                <Route path="/shop/mirrors" exact element={<Mirrors/>} />
+                <Route path="/shop/showpieces" exact element={<Showpieces/>} />
                 {/* <Route path="/profile" exact element={<UserProfile/>} /> */}
-            </Routes>
+              </Routes>
             </Layout>
           )}
         </Auth0Provider>
@@ -189,7 +196,7 @@ const Authentication = () => {
                   element={
                     <SuspenseWrapper>
                       <h1>PROFILE OF SELLER</h1>
-                      <Profile/>
+                      <Profile />
                     </SuspenseWrapper>
                   }
                 />

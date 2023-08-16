@@ -1,16 +1,15 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/fontawesome-free-regular";
-import { faHeart as wishlistheart } from "@fortawesome/fontawesome-free-solid";
 import { useSelector } from "react-redux";
 import { authState } from "../../features/authenticate/authSlice";
 
-const Plantdecor = () => {
+const Mirrors = () => {
   const [prodDetails, setProdDetails] = useState();
 
-  const [wishlistitems, setWishListitems] = useState([]);
+  const [productId, setProductId] = useState();
 
   const { userId } = useSelector(authState);
 
@@ -21,10 +20,18 @@ const Plantdecor = () => {
         const resp = response.data;
         console.log(response.data);
         const planter = resp.filter((plant) => {
-          return plant.categoryDto.categoryId === 1;
+          return plant.categoryDto.categoryId === 4;
         });
         console.log(planter);
         setProdDetails(planter);
+        // resp.map((plant)=> {
+        //     console.log(plant);
+        //     // return{
+        //     //    plant  = resp.categoryDto.category_id === 1
+        //     // }
+        // });
+
+        // setProdDetails(response.data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -33,22 +40,15 @@ const Plantdecor = () => {
 
   useEffect(() => {
     getProd();
-
-    fetchWishlistProducts();
   }, []);
 
   const singleProduct = (id) => {
     console.log(id);
   };
 
-  // condition for switch on wishlist
-  //const wishlistCondition = true; // Set your condition here
-
-  //add wishlist funcn
   const addtowishlit = async (productId) => {
-    console.log('addtowishlit called!');
     const parsedUserId = parseInt(userId);
-
+    // console.log('product id-'+Productid+"userid-"+typeof parseInt(userId));
     await axios
       .post("http://localhost:8082/product/addWishlistProduct", {
         productId,
@@ -64,96 +64,10 @@ const Plantdecor = () => {
       .catch((error) => {
         // Handle any errors
         console.log(error);
-        // console.log(error.response.data.details[0]);
-        // handleClick("error", error.response.data.details[0]);
-      });
-  };
-
-  //remove to wishlist funcn
-  const removeFromWishlist = async (productid) => {
-    await axios
-      .delete(
-        `http://localhost:8082/product/deleteWishlistProduct?productId=${productid}`
-      )
-      .then((response) => {
-        console.log(response.data);
-       
-        console.log("item deleted from wishlist success!");
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  };
-
-  //addto cart
-  const addtoCart = async (productId) => {
-    const parsedUserId = parseInt(userId);
-
-    await axios
-      .post("http://localhost:8082/product/addToCart", {
-        productId,
-        userId: parsedUserId,
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          console.log(response.data);
-          console.log("product added to cart success");
-        } else if (response.status === 401) {
-          console.log(response);
-        }
-      })
-      .catch((error) => {
-        // Handle any errors
-        console.log(error);
         console.log(error.response.data.details[0]);
         handleClick("error", error.response.data.details[0]);
       });
   };
-
-  //fetchwishlist API
-  const fetchWishlistProducts = async () => {
-    try {
-      await axios
-        .get(
-          "http://localhost:8082/product/getWishlistProduct?userId=" +
-          parseInt(userId)
-        )
-        .then((response) => {
-          const data = response.data;
-          console.log(data);
-          setWishListitems(response.data);
-          console.log(wishlistitems);
-        });
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  //toggle functn
-  // const toggleWishlistItem = async (item, status) => {
-  //   console.log("funcn called toggle");
-  //   console.log("wishlist" + wishlistitems + "item-" + item);
-  //   try {
-  //     let tempwishlistitems = wishlistitems;
-
-  //     tempwishlistitems = tempwishlistitems.filter(
-  //       (resp) => resp.product.productId === item
-  //     );
-
-  //     if (tempwishlistitems.length>0) {
-  //       console.log('already added');
-  //     }
-  //     else{
-  //       addtowishlit(item);
-  //     }
-  //     console.log(tempwishlistitems);
-
-
-  //     fetchWishlistProducts(); // Refresh the wishlist items
-  //   } catch (error) {
-  //     console.error("Error toggling wishlist item:", error);
-  //   }
-  // };
 
   return (
     <>
@@ -281,7 +195,6 @@ const Plantdecor = () => {
               </ul>
             </div>
           </div>
-          {/* Card */}
           <div className="products-cards w-3/4 grid grid-cols-3 mb-8">
             {/* Card */}
             {prodDetails &&
@@ -363,4 +276,4 @@ const Plantdecor = () => {
   );
 };
 
-export default Plantdecor;
+export default Mirrors;
