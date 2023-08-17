@@ -1,30 +1,29 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect, useCallback } from "react";
+import { useEffect} from "react";
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/fontawesome-free-regular";
-import { faHeart as wishlistheart } from "@fortawesome/fontawesome-free-solid";
 import { useSelector } from "react-redux";
 import { authState } from "../../features/authenticate/authSlice";
+import { listProducts, sortedProducts } from "../../helper/product.helper";
+import { productState } from "../../features/product/product.slice";
+import { wishlistHelper } from "../../helper/wishlist.helper";
+import { wishlistState } from "../../features/product/wishlist.slice";
 
 const Plantdecor = () => {
-  const [prodDetails, setProdDetails] = useState();
-
-  const [wishlistitems, setWishListitems] = useState([]);
 
   const { userId } = useSelector(authState);
+  const { productsList, sortedList } = useSelector(productState);
+  const {list} = useSelector(wishlistState);
+
 
   async function getProd() {
     await axios
       .get("http://localhost:8082/product/getAllProduct")
       .then((response) => {
         const resp = response.data;
-        console.log(response.data);
         const planter = resp.filter((plant) => {
           return plant.categoryDto.categoryId === 1;
         });
-        console.log(planter);
-        setProdDetails(planter);
+        listProducts(planter);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -33,101 +32,73 @@ const Plantdecor = () => {
 
   useEffect(() => {
     getProd();
-
-    fetchWishlistProducts();
   }, []);
 
   const singleProduct = (id) => {
     console.log(id);
   };
 
-  // condition for switch on wishlist
-  //const wishlistCondition = true; // Set your condition here
+  const handleFilter = async(e) =>{
+    const sorting= e.target.value;
+    sortedProducts(productsList.length >0 && productsList, sorting)  
+  }
 
-  //add wishlist funcn
-  const addtowishlit = async (productId) => {
-    console.log('addtowishlit called!');
-    const parsedUserId = parseInt(userId);
-
-    await axios
-      .post("http://localhost:8082/product/addWishlistProduct", {
-        productId,
-        userId: parsedUserId,
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          console.log(response.data);
-        } else if (response.status === 401) {
-          console.log(response);
+  //manage Wishlist
+  const handleWishlistToggle =(id) =>{
+      if(!list || !list.includes(id)) {
+        wishlistHelper.addToWishlist(id, userId);
+        wishlistHelper.addToArrayWishlist(id);
+      }
+        else {
+          wishlistHelper.removeFromArrayWishlist(id);
+          wishlistHelper.deleteFromWishlist(id);
         }
-      })
-      .catch((error) => {
-        // Handle any errors
-        console.log(error);
-        // console.log(error.response.data.details[0]);
-        // handleClick("error", error.response.data.details[0]);
-      });
-  };
+      }
 
-  //remove to wishlist funcn
-  const removeFromWishlist = async (productid) => {
-    await axios
-      .delete(
-        `http://localhost:8082/product/deleteWishlistProduct?productId=${productid}`
-      )
-      .then((response) => {
-        console.log(response.data);
-       
-        console.log("item deleted from wishlist success!");
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  };
 
   //addto cart
-  const addtoCart = async (productId) => {
-    const parsedUserId = parseInt(userId);
+  // const addtoCart = async (productId) => {
+  //   const parsedUserId = parseInt(userId);
 
-    await axios
-      .post("http://localhost:8082/product/addToCart", {
-        productId,
-        userId: parsedUserId,
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          console.log(response.data);
-          console.log("product added to cart success");
-        } else if (response.status === 401) {
-          console.log(response);
-        }
-      })
-      .catch((error) => {
-        // Handle any errors
-        console.log(error);
-        console.log(error.response.data.details[0]);
-        handleClick("error", error.response.data.details[0]);
-      });
-  };
+  //   await axios
+  //     .post("http://localhost:8082/product/addToCart", {
+  //       productId,
+  //       userId: parsedUserId,
+  //     })
+  //     .then((response) => {
+  //       if (response.status === 200) {
+  //         console.log(response.data);
+  //         console.log("product added to cart success");
+  //       } else if (response.status === 401) {
+  //         console.log(response);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       // Handle any errors
+  //       console.log(error);
+  //       console.log(error.response.data.details[0]);
+  //    //   handleClick("error", error.response.data.details[0]);
+  //     });
+  // };
 
   //fetchwishlist API
-  const fetchWishlistProducts = async () => {
-    try {
-      await axios
-        .get(
-          "http://localhost:8082/product/getWishlistProduct?userId=" +
-          parseInt(userId)
-        )
-        .then((response) => {
-          const data = response.data;
-          console.log(data);
-          setWishListitems(response.data);
-          console.log(wishlistitems);
-        });
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+  // const fetchWishlistProducts = async () => {
+  //   try {
+  //     await axios
+  //       .get(
+  //         "http://localhost:8082/product/getWishlistProduct?userId=" +
+  //         parseInt(userId)
+  //       )
+  //       .then((response) => {
+  //         const data = response.data;
+  //         console.log(data);
+  //         setWishListitems(response.data);
+  //         console.log(wishlistitems);
+  //       });
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
 
   //toggle functn
   // const toggleWishlistItem = async (item, status) => {
@@ -176,9 +147,10 @@ const Plantdecor = () => {
                 <li className=" border-gray-200 rounded-t-lg dark:border-gray-600">
                   <div className="flex items-center">
                     <input
+                      onClick={handleFilter}
                       id="sort-radio-license"
                       type="radio"
-                      value=""
+                      value="high-rating"
                       name="sort-radio"
                       className="w-6 h-6  bg-gray-100 border-gray-300 accent-[#e57200]"
                     />
@@ -186,7 +158,7 @@ const Plantdecor = () => {
                       htmlFor="sort-radio-license"
                       className="w-full py-3 ml-2 text-sm font-medium  "
                     >
-                      Fast Shipping{" "}
+                      Highest Rating{" "}
                     </label>
                   </div>
                 </li>
@@ -194,8 +166,9 @@ const Plantdecor = () => {
                   <div className="flex items-center">
                     <input
                       id="sort-radio-id"
+                      onClick={handleFilter}
                       type="radio"
-                      value=""
+                      value="low-price"
                       name="sort-radio"
                       className="w-6 h-6  bg-gray-100 border-gray-300 accent-[#e57200]"
                     />
@@ -211,8 +184,9 @@ const Plantdecor = () => {
                   <div className="flex items-center">
                     <input
                       id="sort-radio-millitary"
+                      onClick={handleFilter}
                       type="radio"
-                      value=""
+                      value="high-price"
                       name="sort-radio"
                       className="w-6 h-6 bg-gray-100 accent-[#e57200]"
                     />
@@ -232,9 +206,10 @@ const Plantdecor = () => {
                     <input
                       id="price-radio-license"
                       type="radio"
-                      value=""
+                      value="under-2k"
                       name="price-radio"
                       className="w-6 h-6  bg-gray-100 border-gray-300 accent-[#e57200]"
+                      onClick={handleFilter}
                     />
                     <label
                       htmlFor="price-radio-license"
@@ -249,8 +224,9 @@ const Plantdecor = () => {
                     <input
                       id="price-radio-id"
                       type="radio"
-                      value=""
+                      value="btwn-2000-3500"
                       name="price-radio"
+                      onClick={handleFilter}
                       className="w-6 h-6  bg-gray-100 border-gray-300 accent-[#e57200]"
                     />
                     <label
@@ -266,7 +242,8 @@ const Plantdecor = () => {
                     <input
                       id="price-radio-millitary"
                       type="radio"
-                      value=""
+                      onClick={handleFilter}
+                      value="above-3500"
                       name="price-radio"
                       className="w-6 h-6 bg-gray-300 accent-[#e57200]"
                     />
@@ -274,7 +251,7 @@ const Plantdecor = () => {
                       htmlFor="price-radio-millitary"
                       className="w-full py-3 ml-2 text-sm font-medium text-gray-900"
                     >
-                      ₹3500-5000
+                      Above ₹3500
                     </label>
                   </div>
                 </li>
@@ -284,11 +261,10 @@ const Plantdecor = () => {
           {/* Card */}
           <div className="products-cards w-3/4 grid grid-cols-3 mb-8">
             {/* Card */}
-            {prodDetails &&
-              prodDetails.map((item, idx) => {
-                return (
+            {sortedList && sortedList.length >0 &&
+              sortedList.map((item) => (
                   <div
-                    key={idx}
+                    key={item.productId}
                     className="w-[18.5rem] flex flex-col justify-between relative transition shadow-md  hover:shadow-xl"
                   >
                     <div className="flex items-center justify-center">
@@ -308,7 +284,8 @@ const Plantdecor = () => {
                       <p></p>
                       <div className="flex items-center space-x-1">
                         {[0, 1, 2, 3, 4].map((rating) =>
-                          rating < item.ratings ? (
+                          (rating < item.ratings ? 
+                            // eslint-disable-next-line react/jsx-key
                             <svg
                               className="w-4 h-4 text-yellow-500"
                               aria-hidden="true"
@@ -318,7 +295,8 @@ const Plantdecor = () => {
                             >
                               <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                             </svg>
-                          ) : (
+                           :
+                            // eslint-disable-next-line react/jsx-key
                             <svg
                               className="w-4 h-4 text-gray-300 dark:text-gray-500"
                               aria-hidden="true"
@@ -328,7 +306,7 @@ const Plantdecor = () => {
                             >
                               <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                             </svg>
-                          )
+                          ) 
                         )}
                       </div>
                       <div className="overflow-hidden pt-5 flex justify-between">
@@ -338,15 +316,14 @@ const Plantdecor = () => {
                         </div>
                       </div>
                       <button
-                        // onClick={() => toggleWishlistItem(item.productId)}
-                        onClick={() => addtowishlit(item.productId)}
+                        onClick={() => handleWishlistToggle(item.productId)}
                         className="mt-4 w-full text-[#9d6a37] border-[1.5px] 
                             border-[#9d6a37] px-3 py-2 rounded uppercase hover:bg-[#9d6a37] hover:text-[#fff]"
                       >
-                        Add To Wishlist
+                        {list && list.includes(item.productId) ? 'Remove from Wishlist' : 'Add to Wishlist'}
                       </button>
                       <button
-                        onClick={() => addtoCart(item.productId)}
+                       // onClick={() => addtoCart(item.productId)}
                         className="mt-4 w-full text-[#9d6a37] border-[1.5px] 
                                   border-[#9d6a37] px-3 py-2 rounded uppercase hover:bg-[#9d6a37] hover:text-[#fff]"
                       >
@@ -354,8 +331,7 @@ const Plantdecor = () => {
                       </button>
                     </div>
                   </div>
-                );
-              })}
+                ))}
           </div>
         </div>
       </div>

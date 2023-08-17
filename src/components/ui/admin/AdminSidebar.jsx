@@ -1,7 +1,7 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 const AdminSidebar = () => {
+  const userId = sessionStorage.getItem('userId');
   return (
     <>
       <nav className="w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
@@ -42,7 +42,7 @@ const AdminSidebar = () => {
                   </Link>
                   <Link key=""
                     className={` font-thin text-black hover:text-gray-500 hover:font-semibold py-2 uppercase`}>
-                    Login
+                    {userId ? 'Logout' : 'Login'}
                   </Link>
                 </div>
               </div>

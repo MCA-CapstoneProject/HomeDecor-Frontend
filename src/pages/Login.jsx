@@ -3,7 +3,6 @@ import { login } from "../services/auth.service";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { storeAcessPath } from "../helper/Auth.helper";
-import { handleClick } from "../components/Toastcontainer";
 
 export default function Login() {
   const [email, setEmail] = useState();
@@ -52,7 +51,7 @@ export default function Login() {
             SIGN IN
           </h2>
           <div className="flex flex-col text-gray-300 py-2 ">
-            <label className="font-medium text-[1.1rem]">Email</label>
+            <label className="font-medium text-[1.1rem]">Email or Username</label>
             <input
               className="rounded-lg text-lg bg-gray-700 mt-2 p-2  focus:bg-gray-800 focus:outline-none"
               type="text"

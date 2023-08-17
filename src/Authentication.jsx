@@ -38,15 +38,15 @@ const Authentication = () => {
   const isAdminRoute = useAdminRoutes();
 
   return (
-    <>
-      {!isPublicRoute && !isAdminRoute ? (
-        <Auth0Provider
+    <Auth0Provider
           domain={domain}
           clientId={clientId}
           redirectUri={redirectUri}
         //  audience={audience}
         >
-          {(window.location.pathname.includes("/login") || window.location.pathname.includes("/Register")) ? (
+      {!isPublicRoute && !isAdminRoute ? (
+         <> {window.location.pathname.includes("/login") ||
+          window.location.pathname.includes("/Register") ? (
             <Routes>
               <Route path="/login" exact element={<Login />} />
               <Route path="/Register" exact element={<Register />} />
@@ -80,8 +80,31 @@ const Authentication = () => {
               </Routes>
             </Layout>
           )}
-        </Auth0Provider>
-      ) : isAdminRoute ? (
+        </>
+      ) : isAdminRoute ?
+        (window.location.pathname.includes("/admin-dashboard/login") ||
+          window.location.pathname.includes("/admin-dashboard/Register")) ? (
+        <Routes>
+          <Route
+            path="/admin-dashboard/login"
+            exact
+            element={
+              <SuspenseWrapper>
+                <Login />
+              </SuspenseWrapper>
+            }
+          />
+          <Route
+            path="/admin-dashboard/Register"
+            exact
+            element={
+              <SuspenseWrapper>
+                <Register />
+              </SuspenseWrapper>
+            }
+          />
+        </Routes>
+      ) : (
         <Adminlayout>
           <Routes>
             <Route
@@ -139,73 +162,75 @@ const Authentication = () => {
             />
           </Routes>
         </Adminlayout>
-      ) : (
-        <>
-          {(window.location.pathname.includes("/seller-dashboard/login") || window.location.pathname.includes("/seller-dashboard/Register")) ? (
+      )
+      : (
+      <>
+        {window.location.pathname.includes("/seller-dashboard/login") ||
+        window.location.pathname.includes("/seller-dashboard/Register") ? (
+          <Routes>
+            <Route
+              path="/seller-dashboard/login"
+              exact
+              element={
+                <SuspenseWrapper>
+                  <Login />
+                </SuspenseWrapper>
+              }
+            />
+            <Route
+              path="/seller-dashboard/Register"
+              exact
+              element={
+                <SuspenseWrapper>
+                  <Register />
+                </SuspenseWrapper>
+              }
+            />
+          </Routes>
+        ) : (
+          <Layout2>
             <Routes>
               <Route
-                path="/seller-dashboard/login"
+                path="/seller-dashboard"
                 exact
                 element={
                   <SuspenseWrapper>
-                    <Login />
+                    <SellerDashboard />
                   </SuspenseWrapper>
                 }
               />
               <Route
-                path="/seller-dashboard/Register"
+                path="/seller-dashboard/shop"
+                element={
+                  <SuspenseWrapper>
+                    <ProductsList />
+                  </SuspenseWrapper>
+                }
+              />
+              <Route
+                path="/seller-dashboard/add-product"
+                element={
+                  <SuspenseWrapper>
+                    <AddProduct />
+                  </SuspenseWrapper>
+                }
+              />
+              <Route
+                path="/seller-dashboard/profile"
                 exact
                 element={
                   <SuspenseWrapper>
-                    <Register />
+                    <h1>PROFILE OF SELLER</h1>
+                    <Profile />
                   </SuspenseWrapper>
                 }
               />
             </Routes>
-          ) : (
-            <Layout2>
-              <Routes>
-                <Route
-                  path="/seller-dashboard"
-                  exact
-                  element={
-                    <SuspenseWrapper>
-                      <SellerDashboard />
-                    </SuspenseWrapper>
-                  }
-                />
-                <Route
-                  path="/seller-dashboard/shop"
-                  element={
-                    <SuspenseWrapper>
-                      <ProductsList />
-                    </SuspenseWrapper>
-                  }
-                />
-                <Route
-                  path="/seller-dashboard/add-product"
-                  element={
-                    <SuspenseWrapper>
-                      <AddProduct />
-                    </SuspenseWrapper>
-                  }
-                />
-                <Route
-                  path="/seller-dashboard/profile"
-                  exact
-                  element={
-                    <SuspenseWrapper>
-                      <h1>PROFILE OF SELLER</h1>
-                      <Profile />
-                    </SuspenseWrapper>
-                  }
-                />
-              </Routes>
-            </Layout2>
-          )}
-        </>
+          </Layout2>
+        )}
+      </>
       )}
-    </>
+    </Auth0Provider>
   );
 };
 

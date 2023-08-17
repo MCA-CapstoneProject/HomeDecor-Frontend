@@ -14,7 +14,7 @@ async function login(usernameOrEmail, password) {
         sessionStorage.setItem("userId", JSON.stringify(response.data.userId));
   
         let path = window.location.pathname;
-        let redirect = path.includes("seller") ? "/seller-dashboard" : path.includes("admin") ? "/admin" : "/";
+        let redirect = path.includes("seller") ? "/seller-dashboard" : path.includes("admin") ? "/admin-dashboard" : "/";
         handleClick("success", "Logged In Successfully");
         setTimeout(() => {
           window.location.href = redirect;        

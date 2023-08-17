@@ -1,11 +1,14 @@
 import { useState, useRef } from "react";
 import axios from "axios";
 import { getHeaders } from "../../../config";
+import { useSelector } from "react-redux";
+import { authState } from "../../features/authenticate/authSlice";
 
 function AddProduct() {
   const formRef = useRef(null);
   const [base64Image, setbase64Image] = useState("");
   const apiUrl = "http://localhost:8082/product/add";
+  const { user, userId } = useSelector(authState);
 
   const handleFileChange = (event) => {
     const reader = new FileReader();
@@ -28,18 +31,13 @@ function AddProduct() {
       "imagePath" :base64Image,
       "quantity" : formData.get("prod_quantity"),
       "size" : formData.get("prod_size"),
-      // "brandId": {
-      //   "brandId": formData.get("prod_brand")
-      // },
-      // "categoryId": {
-      //   "categoryId": formData.get("prod_category")
-      // }
       "brandDto": {
         "brandId": formData.get("prod_brand")
       },
       "categoryDto": {
         "categoryId": formData.get("prod_category")
-      }
+      },
+      "userId": userId
     }
     await axios
       .post(apiUrl, payload, getHeaders())
@@ -56,10 +54,11 @@ function AddProduct() {
         setbase64Image(null);
     }
   }
+
   return (
     <>
     <div className="head items-center text-gray-300 px-10 bg-[#34495E] select-none h-36 rounded-2xl mx-auto shadow-xl">
-      <h1 className='text-3xl pt-8'>Hello Seller, Want To Add Some Products?</h1>
+      <h1 className='text-3xl pt-8'>Hello {user}, Want To Add Some Products?</h1>
       <p className='text-lg py-4'>Well Go Ahead, Add the Details and Images of the Product and Click on the Submit Button to Apply the Changes. </p>
     </div>
     <div className="container mx-auto mt-10 w-[500px] h-auto rounded-2xl shadow-2xl">

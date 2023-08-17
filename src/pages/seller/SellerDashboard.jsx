@@ -1,7 +1,15 @@
+import { useEffect } from "react";
 import ProductTable from "../../components/ui/seller/ProductTable";
 import Cards from "../../components/ui/seller/cards";
+import { setAuthUsername } from "../../helper/Auth.helper";
 
 function SellerDashboard() {
+
+  useEffect(()=>{
+    setAuthUsername(sessionStorage.getItem('uname'))
+    console.log(sessionStorage.getItem('uname'))
+  },[])
+  
   return (
     <>
         {/* Main content area */}

@@ -2,7 +2,7 @@ import { store } from "../app/store";
 import { setAccessPath, setAccessToken, setUsername,setUserId } from "../features/authenticate/authSlice";
 
 
-export function SetAuthUsername(username){
+export function setAuthUsername(username){
     store.dispatch(setUsername(username));
 }
 

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 export default function Sidebar() {
+
   return (
     <nav className="relative h-screen w-60 bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)]">
       {/* Sidebar content */}
@@ -107,7 +108,7 @@ export default function Sidebar() {
 
         <Link
           href="#"
-          class="flex items-center px-6 py-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+          class="flex items-center px-6 py-4 active:text-red text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
         >
           <svg
             className="w-6 h-6"

@@ -1,4 +1,4 @@
-import React from 'react'
+
 import AdminMainPage from '../../components/ui/admin/AdminMainPage'
 
 const AdminDashboard = () => {

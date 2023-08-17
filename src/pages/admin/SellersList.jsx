@@ -1,29 +1,38 @@
-import React from 'react';
 import { Link } from "react-router-dom";
 import { DataGrid, gridClasses } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import { alpha, styled } from '@mui/material/styles';
 import { toast, ToastContainer } from "react-toastify";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { getHeaders } from "../../../config";
 // import { DeleteOutline } from "@mui/icons-material";
 
 const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'firstName', headerName: 'First name', width: 130 },
-    { field: 'lastName', headerName: 'Last name', width: 130 },
+    { field: 'userId', headerName: 'ID', width: 70 },
+    { field: 'fullName', headerName: 'Full name',
+    description: 'This column has a value getter and is not sortable.',
+    sortable: false, width: 180 },
+    { field: 'userName', headerName: 'User name', width: 130 },
     {
-        field: 'age',
-        headerName: 'Age',
-        type: 'number',
-        width: 90,
+        field: 'email',
+        headerName: 'Email',
+        width: 250,
     },
     {
-        field: 'fullName',
-        headerName: 'Full name',
-        description: 'This column has a value getter and is not sortable.',
-        sortable: false,
-        width: 160,
-        valueGetter: (params) =>
-            `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+        field: 'gender',
+        headerName: 'Gender',
+        width: 110,
+    },
+    {
+        field: 'phone',
+        headerName: 'Phone',
+        width: 180,
+    },
+    {
+        field: 'address',
+        headerName: 'Address',
+        width: 250,
     },
 
     // user actions
@@ -41,37 +50,13 @@ const columns = [
                     {/* delete btn */}
                     {/* <Link to=""> */}
                         <button className="flex" onClick={() =>  handleClick("success")}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e23232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e23232" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                         </button>
                     {/* </Link> */}
                 </>
             );
         },
     },
-];
-
-const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    { id: 10, lastName: 'Demo', firstName: 'Jon', age: 32 },
-    { id: 11, lastName: 'NYork', firstName: 'Cersel', age: 40 },
-    { id: 12, lastName: 'Lannister', firstName: 'Jaime', age: 50 },
-    { id: 13, lastName: 'Stark', firstName: 'Arya', age: 36 },
-    { id: 14, lastName: 'Targaryen', firstName: 'Denerys', age: null },
-    { id: 15, lastName: 'Melisandre', firstName: null, age: 50 },
-    { id: 16, lastName: 'Clifford', firstName: 'Ferrare', age: 44 },
-    { id: 17, lastName: 'Frances', firstName: 'Roshni', age: 36 },
-    { id: 18, lastName: 'Roxie', firstName: 'Harvi', age: 58 },
-    { id: 19, lastName: 'India', firstName: 'Roshni', age: 36 },
-    { id: 20, lastName: 'India', firstName: 'Harvi', age: 28 },
-
 ];
 
 // grid
@@ -117,6 +102,24 @@ const StripedDataGrid = styled(DataGrid)(({ theme }) => ({
 }
 
 const SellersList = () => {
+    const [sellerDetails, setSellerDetails] = useState();
+
+    async function getList(){
+        await axios.get("http://localhost:8082/secured/user/getUsersByRoleId?roleId=2", getHeaders())
+        .then((response) => {
+          console.log(response.data)
+            setSellerDetails(response.data);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+        }
+   
+    useEffect(() => {
+        getList();
+    },[])
+
+    const getRowId = (row) => row.userId;
     return (
         <Box>
             <ToastContainer
@@ -135,7 +138,7 @@ const SellersList = () => {
                 <div className="flex justify-between">
                     <p className='font-bold text-xl mb-4'>Sellers List</p>
                     <Link className='flex items-center gap-1' to="/admin-dashboard/adduser">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E57373" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E57373" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line>
                             <line x1="8" y1="12" x2="16" y2="12"></line></svg>
                         <span className='font-medium hover:font-bold text-lg text-[#E57373]'>Create</span>
                     </Link>
@@ -144,8 +147,9 @@ const SellersList = () => {
                 <div style={{ width: "100%", }}>
                     <StripedDataGrid
                         // loading={loading}
-                        rows={rows}
+                        rows={sellerDetails && sellerDetails.length>0 ? sellerDetails : {}}
                         columns={columns}
+                        getRowId={getRowId}
                         disableSelectionOnClick
                         pageSize={10}
                         style={{ fontFamily: "Montserrat" }}

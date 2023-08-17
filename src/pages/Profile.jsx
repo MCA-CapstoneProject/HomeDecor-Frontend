@@ -1,9 +1,9 @@
-import React, {useState, useMemo} from 'react'
+import {useState, useMemo} from 'react'
 import Select from 'react-select'
 import countryList from 'react-select-country-list'
 
 function Profile() {
-
+  const username = sessionStorage.getItem('uname');
   const [value, setValue] = useState('')
   const options = useMemo(() => countryList().getData(), [])
 
@@ -11,11 +11,12 @@ function Profile() {
     setValue(value)
   }
     
+  
 
   return (
     <>
     <div className="banner text-gray-300 px-10 bg-[#34495E] select-none h-36 py-14 mt-10 mx-10 rounded-2xl shadow-xl">
-      <h1 className='text-4xl'>Hello User, Welcome Back</h1>
+      <h1 className='text-4xl'>Hello {username}, Welcome Back</h1>
     </div>
     <div className="personal-info flex px-10 bg-white text-lg mx-10 rounded-2xl shadow-2xl py-10 mt-10">
       <div>
