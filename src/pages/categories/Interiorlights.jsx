@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/fontawesome-free-regular";
 import { useSelector } from "react-redux";
 import { authState } from "../../features/authenticate/authSlice";
 import { listProducts, sortedProducts } from "../../helper/product.helper";
@@ -13,12 +11,8 @@ import { getHeaders } from "../../../config";
 import { handleClick } from "../../components/Toastcontainer";
 
 const Interiorlights = () => {
-  const [prodDetails, setProdDetails] = useState();
   const { productsList, sortedList } = useSelector(productState);
   const { list } = useSelector(wishlistState);
-
-  console.log(productsList);
-
   const { userId } = useSelector(authState);
 
   async function getProd() {
@@ -26,11 +20,9 @@ const Interiorlights = () => {
       .get("http://localhost:8082/product/getAllProduct")
       .then((response) => {
         const resp = response.data;
-        console.log(response.data);
         const interiorAndLight = resp.filter((interior) => {
           return interior.categoryDto.categoryId === 3;
         });
-        console.log(interiorAndLight);
         listProducts(interiorAndLight);
         // resp.map((plant)=> {
         //     console.log(plant);
@@ -80,6 +72,7 @@ const Interiorlights = () => {
       {
         productId,
         userId: parsedUserId,
+        quantity: 1
       },
       getHeaders()
     )
@@ -259,9 +252,9 @@ const Interiorlights = () => {
             {/* Card */}
             {sortedList &&
               sortedList.length > 0 &&
-              sortedList.map((item) => {
+              sortedList.map((item, idx) => {
                 return (
-                  <div 
+                  <div key={idx}
                     className="w-[18.5rem] flex flex-col justify-between relative transition shadow-md  hover:shadow-xl"
                   >
                     <div className="flex items-center justify-center">

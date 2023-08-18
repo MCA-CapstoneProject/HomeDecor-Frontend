@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/fontawesome-free-regular";
 import { useSelector } from "react-redux";
 import { authState } from "../../features/authenticate/authSlice";
 import { listProducts, sortedProducts } from "../../helper/product.helper";
@@ -14,12 +12,8 @@ import { handleClick } from "../../components/Toastcontainer";
 
 
 const Mirrors = () => {
-  const [prodDetails, setProdDetails] = useState();
   const { productsList, sortedList } = useSelector(productState);
   const { list } = useSelector(wishlistState);
-
-  console.log(productsList);
-
   const { userId } = useSelector(authState);
 
   async function getProd() {
@@ -27,11 +21,9 @@ const Mirrors = () => {
       .get("http://localhost:8082/product/getAllProduct")
       .then((response) => {
         const resp = response.data;
-        console.log(response.data);
         const mirrors = resp.filter((mirror) => {
           return mirror.categoryDto.categoryId === 4;
         });
-        console.log(mirrors);
         listProducts(mirrors);
         // resp.map((plant)=> {
         //     console.log(plant);
@@ -81,6 +73,7 @@ const Mirrors = () => {
       {
         productId,
         userId: parsedUserId,
+        quantity: 1
       },
       getHeaders()
     )
@@ -261,9 +254,9 @@ const Mirrors = () => {
             {/* Card */}
             {sortedList &&
               sortedList.length > 0 &&
-              sortedList.map((item)=> {
+              sortedList.map((item,idx)=> {
                 return (
-                  <div
+                  <div key={idx}
                     className="w-[18.5rem] flex flex-col justify-between relative transition shadow-md  hover:shadow-xl"
                   >
                     <div className="flex items-center justify-center">
@@ -284,6 +277,7 @@ const Mirrors = () => {
                       <div className="flex items-center space-x-1">
                         {[0, 1, 2, 3, 4].map((rating) =>
                           rating < item.ratings ? (
+                            // eslint-disable-next-line react/jsx-key
                             <svg
                               className="w-4 h-4 text-yellow-500"
                               aria-hidden="true"
@@ -294,6 +288,7 @@ const Mirrors = () => {
                               <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                             </svg>
                           ) : (
+                            // eslint-disable-next-line react/jsx-key
                             <svg
                               className="w-4 h-4 text-gray-300 dark:text-gray-500"
                               aria-hidden="true"

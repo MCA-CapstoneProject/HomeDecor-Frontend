@@ -28,7 +28,7 @@ function AddProduct() {
       "ratings": formData.get("prod_rating"),
       "productCode": formData.get("prod_code"),
       "price": formData.get("prod_price"),
-      "discount_price": formData.get("prod_discountedprice"),
+      "discountPrice": formData.get("prod_discountprice"),
       "imagePath" :base64Image,
       "quantity" : formData.get("prod_quantity"),
       "size" : formData.get("prod_size"),
@@ -98,7 +98,7 @@ function AddProduct() {
         />
         </span>
         <span>
-        <input name="prod_discountedprice"
+        <input name="prod_discountprice"
           className="outline-none bg-transparent w-[400px] mt-8 border-b-2 text-gray-500"
           type="text"
           placeholder="Enter Discounted Product Price"

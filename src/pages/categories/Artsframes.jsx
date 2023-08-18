@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/fontawesome-free-regular";
 import { useSelector } from "react-redux";
 import { authState } from "../../features/authenticate/authSlice";
 import { listProducts, sortedProducts } from "../../helper/product.helper";
@@ -13,11 +11,8 @@ import { getHeaders } from "../../../config";
 import { handleClick } from "../../components/Toastcontainer";
 
 const Artsframes = () => {
-  const [prodDetails, setProdDetails] = useState();
   const { productsList, sortedList } = useSelector(productState);
   const { list } = useSelector(wishlistState);
-
-  console.log(productsList);
 
   const { userId } = useSelector(authState);
 
@@ -26,11 +21,9 @@ const Artsframes = () => {
       .get("http://localhost:8082/product/getAllProduct")
       .then((response) => {
         const resp = response.data;
-        console.log(response.data);
         const artAndFrame = resp.filter((art) => {
           return art.categoryDto.categoryId === 2;
         });
-        console.log(artAndFrame);
         listProducts(artAndFrame);
         // resp.map((plant)=> {
         //     console.log(plant);
@@ -80,6 +73,7 @@ const Artsframes = () => {
         {
           productId,
           userId: parsedUserId,
+          quantity: 1
         },
         getHeaders()
       )
@@ -261,9 +255,9 @@ const Artsframes = () => {
             {/* Card */}
             {sortedList &&
               sortedList.length > 0 &&
-              sortedList.map((item) => {
+              sortedList.map((item, idx) => {
                 return (
-                  <div className="w-[18.5rem] flex flex-col justify-between relative transition shadow-md  hover:shadow-xl">
+                  <div key={idx} className="w-[18.5rem] flex flex-col justify-between relative transition shadow-md  hover:shadow-xl">
                     <div className="flex items-center justify-center">
                       <Link
                         onClick={() => singleProduct(item.productId)}

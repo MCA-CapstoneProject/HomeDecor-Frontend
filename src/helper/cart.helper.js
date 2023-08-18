@@ -70,7 +70,7 @@ async function deleteFromCart(cartId) {
 }
 
 //fetch cart products
-async function getListOfCartlist() {
+async function getListOfCartlist(userId) {
   await axios
     .get(
       "http://localhost:8082/secured/product/getCart?userId=" +
@@ -79,8 +79,6 @@ async function getListOfCartlist() {
     )
     .then((response) => {
       console.log(response.data);
-      setCartProducts(response.data);
-      console.log(cartproducts);
     })
     .catch((error) => {
       console.error("Error:", error);

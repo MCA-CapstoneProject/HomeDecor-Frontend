@@ -6,13 +6,12 @@ import { getHeaders } from "../../config";
 import { Link } from "react-router-dom";
 
 export default function Cart() {
-  const [amount, setAmount] = useState(1);
   const { userId } = useSelector(authState);
   const [cartproducts, setCartProducts] = useState([]);
 
   //remove from cart
   async function removeCartProducts(cartId) {
-    await axios.delete(`http://localhost:8082/secured/product/deleteCart?cartId=${cartId}`,
+    await axios.delete(`http://localhost:8082/secured/product/deleteCart?cartId=`+parseInt(cartId),
     getHeaders()
     )
       .then((response) => {
@@ -21,6 +20,21 @@ export default function Cart() {
         // console.log(wishlistproducts);
         console.log('item deleted from cart success!');
 
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+
+  async function updateQuantity(id, newQuantity) {
+    await axios.post("http://localhost:8082/secured/product/updateCart",
+    { cartId: parseInt(id),
+      quantity:newQuantity
+    },
+    getHeaders()
+    )
+      .then((response) => {
+        console.log(response.data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -46,6 +60,16 @@ export default function Cart() {
   useEffect(() => {
     fetchCartProducts();
   }, [])
+
+
+  const decrement = (id, quantity) =>{
+    const amount = quantity -1 >0 && quantity-1
+    updateQuantity(id,amount);
+  }
+  const increment = (id, quantity, productQuantity) =>{
+    const amount = quantity +1 <= productQuantity && quantity+1
+    updateQuantity(id,amount);
+  }
 
   return (
     <>
@@ -78,9 +102,9 @@ export default function Cart() {
                 <p>{item.productMasterDto.productName}</p>
                 <p className='text-slate-400'>{item.productMasterDto.brandDto.brandName}</p>
                 <div className='flex flex-row items-center'>
-                  <button className='bg-gray-200 px-3 rounded-lg text-violet-800 text-3xl' onClick={() => setAmount((prev) => prev - 1)}>-</button>
-                  <span className='py-4 px-6 rounded-lg'>{amount}</span>
-                  <button className='bg-gray-200 px-3 rounded-lg text-violet-800 text-3xl' onClick={() => setAmount((prev) => prev + 1)}>+</button>
+                  <button className='bg-gray-200 px-3 rounded-lg text-violet-800 text-3xl' onClick={() => decrement(item.cartId, item.quantity)}>-</button>
+                  <span className='py-4 px-6 rounded-lg'>{item.quantity}</span>
+                  <button className='bg-gray-200 px-3 rounded-lg text-violet-800 text-3xl' onClick={() => increment(item.cartId,item.quantity,item.productMasterDto,)}>+</button>
                 </div>
                 <div className="flex my-8">
                   <div>
@@ -98,29 +122,35 @@ export default function Cart() {
           </div>
           {/* Price Column */}
           <div className='ml-5 w-2/5 h-auto float-right'>
-          {cartproducts && cartproducts.map((item, idx) => {
-          return (
-            <div key={idx} className='border-2 w-[500px] h-auto'>
+          <div className='border-2 w-[500px] h-auto'>
               <h1 className='font-semibold text-center text-xl mt-3'>Cart Summary</h1>
-              <div className='flex'>
-                <div className='ml-3'>
-                  <div className='mt-4'>Items in Cart</div>
-                  <div className='mb-2'>Cart Total Price</div>
-                  <div className='font-bold uppercase border-black border-t-2 mt-5'>You Pay</div>
-                  <div className='text-green-600 font-semibold mb-2'>You Saved</div>
-                </div>
-                
-                <div className='ml-60'>
-                  <div className='mt-4'>{cartproducts.length}</div>
-                  <div className='mb-2'>Rs.{item.productMasterDto.discountPrice}</div>
-                  <div className='font-semibold mt-5 border-black border-t-2'>Rs.{item.productMasterDto.discountPrice}</div>
-                  <div className='text-green-600 font-semibold mb-2'>Rs.399</div>
-                </div>
+              <table className="flex flex-col space-y-4 w-full p-4">
+                <thead className="bg-gray-100 rounded-mg p-2 px-4">
+                  <tr className="grid grid-cols-3 text-start">
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody className="px-4">
+                  {cartproducts && cartproducts.map((item,idx)=>{
+                    return(
+                      <tr key={idx} className="grid grid-cols-3 text-center">
+                        <td className="col-span-1">{item.productMasterDto.productName}</td>
+                        <td>{item.quantity}</td>
+                        <td>{item.productMasterDto.discountPrice}</td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+              <div className="flex justify-between p-6 font-bold text-xl">
+                <h1>Total Price</h1>
+                <h1 className="text-green-500">Rs. 0000</h1>
               </div>
-            </div>
-          ) })}
             <button className='bg-red-400 w-[500px] border-2 border-red-400 text-white font-bold uppercase mt-3 p-5 hover:bg-transparent hover:text-[#111]'>Proceed To Checkout</button>
           </div>
+        </div>
         </div>
       </div>   
       )
