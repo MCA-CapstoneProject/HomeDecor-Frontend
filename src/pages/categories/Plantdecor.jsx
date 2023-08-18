@@ -17,7 +17,6 @@ const Plantdecor = () => {
   const {list} = useSelector(wishlistState);
 
 
-  console.log(productsList);
   async function getProd() {
     await axios
       .get("http://localhost:8082/product/getAllProduct")

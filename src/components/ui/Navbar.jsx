@@ -7,11 +7,17 @@ import { faHeart,faUserCircle, } from "@fortawesome/fontawesome-free-regular";
 import ProductsNavbar from "../ui/ProductsNavbar";
 import { useSelector } from "react-redux";
 import { authState } from "../../features/authenticate/authSlice";
-import { fetchAccessToken } from "../../helper/Auth.helper";
+import { fetchAccessToken, setAuthUsername, storeUserId } from "../../helper/Auth.helper";
+
 
 function Navbar() {
   const [activeLink, setActiveLink] = useState("");
   const auth = useSelector(authState);
+    fetchAccessToken(sessionStorage.getItem('token'))
+    storeUserId(sessionStorage.getItem("userId"));
+    setAuthUsername(sessionStorage.getItem("uname"));
+
+
   const handleLinkClick = (path) => {
     setActiveLink(path);
   };

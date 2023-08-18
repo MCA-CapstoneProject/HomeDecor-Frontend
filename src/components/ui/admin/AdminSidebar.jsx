@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom';
+import { fetchAccessToken, setAuthUsername, storeUserId } from "../../helper/Auth.helper";
+
 
 const AdminSidebar = () => {
   const userId = sessionStorage.getItem('userId');
+    fetchAccessToken(sessionStorage.getItem('token'))
+    storeUserId(sessionStorage.getItem("userId"));
+    setAuthUsername(sessionStorage.getItem("uname"));
   return (
     <>
       <nav className="w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)]">

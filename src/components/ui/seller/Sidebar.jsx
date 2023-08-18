@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
+import { fetchAccessToken, setAuthUsername, storeUserId } from "../../helper/Auth.helper";
 
 export default function Sidebar() {
-
+    fetchAccessToken(sessionStorage.getItem('token'))
+    storeUserId(sessionStorage.getItem("userId"));
+    setAuthUsername(sessionStorage.getItem("uname"));
   return (
     <nav className="relative h-screen w-60 bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)]">
       {/* Sidebar content */}

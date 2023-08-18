@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { authState } from "../features/authenticate/authSlice";
 import { getHeaders } from "../../config";
 import { Link } from "react-router-dom";
 
-export default function cart() {
+export default function Cart() {
   const [amount, setAmount] = useState(1);
   const { userId } = useSelector(authState);
   const [cartproducts, setCartProducts] = useState([]);
@@ -26,25 +26,23 @@ export default function cart() {
       });
   }
 
+  async function fetchCartProducts() {
+    await axios.get("http://localhost:8082/secured/product/getCart?userId=" + parseInt(userId),
+    getHeaders()
+    )
+      .then((response) => {
+        console.log(response.data);
+        setCartProducts(response.data);
+        console.log(cartproducts);
+
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+
   useEffect(() => {
-
-    async function fetchCartProducts() {
-      await axios.get("http://localhost:8082/secured/product/getCart?userId=" + parseInt(userId),
-      getHeaders()
-      )
-        .then((response) => {
-          console.log(response.data);
-          setCartProducts(response.data);
-          console.log(cartproducts);
-
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    }
-
     fetchCartProducts();
-
   }, [])
 
   return (
@@ -100,7 +98,7 @@ export default function cart() {
           <div className='ml-5 w-2/5 h-auto float-right'>
           {cartproducts && cartproducts.map((item, idx) => {
           return (
-            <div className='border-2 w-[500px] h-auto'>
+            <div key={idx} className='border-2 w-[500px] h-auto'>
               <h1 className='font-semibold text-center text-xl mt-3'>Cart Summary</h1>
               <div className='flex'>
                 <div className='ml-3'>
