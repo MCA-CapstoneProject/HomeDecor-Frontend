@@ -5,6 +5,7 @@ import {
 } from "../features/product/wishlist.slice";
 import { store } from "../app/store";
 import { getHeaders } from "../../config";
+import { handleClick } from "../components/Toastcontainer";
 
 export const wishlistHelper = {
   addToWishlist,
@@ -36,6 +37,7 @@ async function addToWishlist(productId, userId) {
     .then((response) => {
       if (response.status === 200) {
         console.log(response.data);
+        handleClick("success", "Product Added To Wishlist");
       } else if (response.status === 401) {
         console.log(response);
       }
@@ -53,6 +55,7 @@ async function deleteFromWishlist(productId) {
     )
     .then((response) => {
       console.log(response.data);
+      handleClick("warning", "Product Removed From Wishlist");
     })
     .catch((error) => {
       console.error("Error:", error);

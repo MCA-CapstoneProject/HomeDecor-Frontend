@@ -5,11 +5,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/fontawesome-free-regular";
 import { useSelector } from "react-redux";
 import { authState } from "../../features/authenticate/authSlice";
+import { listProducts, sortedProducts } from "../../helper/product.helper";
+import { productState } from "../../features/product/product.slice";
+import { wishlistHelper } from "../../helper/wishlist.helper";
+import { wishlistState } from "../../features/product/wishlist.slice";
+import { getHeaders } from "../../../config";
+import { handleClick } from "../../components/Toastcontainer";
 
 const Artsframes = () => {
   const [prodDetails, setProdDetails] = useState();
+  const { productsList, sortedList } = useSelector(productState);
+  const { list } = useSelector(wishlistState);
 
-  const [productId, setProductId] = useState();
+  console.log(productsList);
 
   const { userId } = useSelector(authState);
 
@@ -19,11 +27,11 @@ const Artsframes = () => {
       .then((response) => {
         const resp = response.data;
         console.log(response.data);
-        const planter = resp.filter((plant) => {
-          return plant.categoryDto.categoryId === 2;
+        const artAndFrame = resp.filter((art) => {
+          return art.categoryDto.categoryId === 2;
         });
-        console.log(planter);
-        setProdDetails(planter);
+        console.log(artAndFrame);
+        listProducts(artAndFrame);
         // resp.map((plant)=> {
         //     console.log(plant);
         //     // return{
@@ -46,17 +54,40 @@ const Artsframes = () => {
     console.log(id);
   };
 
-  const addtowishlit = async (productId) => {
+  const handleFilter = async (e) => {
+    const sorting = e.target.value;
+    sortedProducts(productsList.length > 0 && productsList, sorting);
+  };
+
+  //manage Wishlist
+  const handleWishlistToggle = (id) => {
+    if (!list || !list.includes(id)) {
+      wishlistHelper.addToWishlist(id, userId);
+      wishlistHelper.addToArrayWishlist(id);
+    } else {
+      wishlistHelper.removeFromArrayWishlist(id);
+      wishlistHelper.deleteFromWishlist(id);
+    }
+  };
+
+  //
+  const addtoCart = async (productId) => {
     const parsedUserId = parseInt(userId);
-    // console.log('product id-'+Productid+"userid-"+typeof parseInt(userId));
+
     await axios
-      .post("http://localhost:8082/product/addWishlistProduct", {
-        productId,
-        userId: parsedUserId,
-      })
+      .post(
+        "http://localhost:8082/secured/product/addToCart",
+        {
+          productId,
+          userId: parsedUserId,
+        },
+        getHeaders()
+      )
       .then((response) => {
         if (response.status === 200) {
           console.log(response.data);
+          handleClick("success", "Product Added To Cart");
+          console.log("product added to cart success");
         } else if (response.status === 401) {
           console.log(response);
         }
@@ -65,10 +96,35 @@ const Artsframes = () => {
         // Handle any errors
         console.log(error);
         console.log(error.response.data.details[0]);
-        handleClick("error", error.response.data.details[0]);
+        //   handleClick("error", error.response.data.details[0]);
       });
   };
 
+  // const addtowishlit = async (productId) => {
+  //   const parsedUserId = parseInt(userId);
+  //   // console.log('product id-'+Productid+"userid-"+typeof parseInt(userId));
+  //   await axios
+  //     .post("http://localhost:8082/product/addWishlistProduct", {
+  //       productId,
+  //       userId: parsedUserId,
+  //     })
+  //     .then((response) => {
+  //       if (response.status === 200) {
+  //         console.log(response.data);
+  //       } else if (response.status === 401) {
+  //         console.log(response);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       // Handle any errors
+  //       console.log(error);
+  //       console.log(error.response.data.details[0]);
+  //       handleClick("error", error.response.data.details[0]);
+  //     });
+  // };
+
+ 
+  //addtocart
   return (
     <>
       <div className="">
@@ -90,9 +146,10 @@ const Artsframes = () => {
                 <li className=" border-gray-200 rounded-t-lg dark:border-gray-600">
                   <div className="flex items-center">
                     <input
+                      onClick={handleFilter}
                       id="sort-radio-license"
                       type="radio"
-                      value=""
+                      value="high-rating"
                       name="sort-radio"
                       className="w-6 h-6  bg-gray-100 border-gray-300 accent-[#e57200]"
                     />
@@ -100,7 +157,7 @@ const Artsframes = () => {
                       htmlFor="sort-radio-license"
                       className="w-full py-3 ml-2 text-sm font-medium  "
                     >
-                      Fast Shipping{" "}
+                      Highest Rating{" "}
                     </label>
                   </div>
                 </li>
@@ -108,8 +165,9 @@ const Artsframes = () => {
                   <div className="flex items-center">
                     <input
                       id="sort-radio-id"
+                      onClick={handleFilter}
                       type="radio"
-                      value=""
+                      value="low-price"
                       name="sort-radio"
                       className="w-6 h-6  bg-gray-100 border-gray-300 accent-[#e57200]"
                     />
@@ -125,8 +183,9 @@ const Artsframes = () => {
                   <div className="flex items-center">
                     <input
                       id="sort-radio-millitary"
+                      onClick={handleFilter}
                       type="radio"
-                      value=""
+                      value="high-price"
                       name="sort-radio"
                       className="w-6 h-6 bg-gray-100 accent-[#e57200]"
                     />
@@ -146,9 +205,10 @@ const Artsframes = () => {
                     <input
                       id="price-radio-license"
                       type="radio"
-                      value=""
+                      value="under-2k"
                       name="price-radio"
                       className="w-6 h-6  bg-gray-100 border-gray-300 accent-[#e57200]"
+                      onClick={handleFilter}
                     />
                     <label
                       htmlFor="price-radio-license"
@@ -163,8 +223,9 @@ const Artsframes = () => {
                     <input
                       id="price-radio-id"
                       type="radio"
-                      value=""
+                      value="btwn-2000-3500"
                       name="price-radio"
+                      onClick={handleFilter}
                       className="w-6 h-6  bg-gray-100 border-gray-300 accent-[#e57200]"
                     />
                     <label
@@ -180,7 +241,8 @@ const Artsframes = () => {
                     <input
                       id="price-radio-millitary"
                       type="radio"
-                      value=""
+                      onClick={handleFilter}
+                      value="above-3500"
                       name="price-radio"
                       className="w-6 h-6 bg-gray-300 accent-[#e57200]"
                     />
@@ -188,7 +250,7 @@ const Artsframes = () => {
                       htmlFor="price-radio-millitary"
                       className="w-full py-3 ml-2 text-sm font-medium text-gray-900"
                     >
-                      ₹3500-5000
+                      Above ₹3500
                     </label>
                   </div>
                 </li>
@@ -197,19 +259,21 @@ const Artsframes = () => {
           </div>
           <div className="products-cards w-3/4 grid grid-cols-3 mb-8">
             {/* Card */}
-            {prodDetails &&
-              prodDetails.map((item, idx) => {
+            {sortedList &&
+              sortedList.length > 0 &&
+              sortedList.map((item) => {
                 return (
-                  <div
-                    key={idx}
-                    className="w-[18.5rem] flex flex-col justify-between relative transition shadow-md  hover:shadow-xl"
-                  >
+                  <div className="w-[18.5rem] flex flex-col justify-between relative transition shadow-md  hover:shadow-xl">
                     <div className="flex items-center justify-center">
                       <Link
                         onClick={() => singleProduct(item.productId)}
                         to={`/singleproduct/${item.productId}`}
                       >
-                        <img src={item.imagePath} alt="product-image" />
+                        <img
+                          src={item.imagePath}
+                          className="w-[20rem] h-[20rem]"
+                          alt="product-image"
+                        />
                       </Link>
                     </div>
                     <div className="p-7">
@@ -251,12 +315,13 @@ const Artsframes = () => {
                         </div>
                       </div>
                       <button
-                        // onClick={() => toggleWishlistItem(item.productId)}
-                        onClick={() => addtowishlit(item.productId)}
+                        onClick={() => handleWishlistToggle(item.productId)}
                         className="mt-4 w-full text-[#9d6a37] border-[1.5px] 
                             border-[#9d6a37] px-3 py-2 rounded uppercase hover:bg-[#9d6a37] hover:text-[#fff]"
                       >
-                        Add To Wishlist
+                        {list && list.includes(item.productId)
+                          ? "Remove from Wishlist"
+                          : "Add to Wishlist"}
                       </button>
                       <button
                         onClick={() => addtoCart(item.productId)}

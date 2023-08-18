@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { authState } from "../features/authenticate/authSlice";
 import { getHeaders } from "../../config";
+import { Link } from "react-router-dom";
 
 export default function Wishlist() {
   const { userId } = useSelector(authState);
@@ -47,8 +48,19 @@ export default function Wishlist() {
 
   return (
     <>
+    {(wishlistproducts.length==0 ? (
+      <>
       <div className="m-10 ml-24">
-        <h1 className="text-xl font-semibold">My Wishlist( Items)</h1>
+        <h2 className="text-xl font-medium py-8">Your Wishlist Is Empty </h2>
+        <Link to="/shop">
+        Explore Our Products Section
+        </Link>
+      </div>
+      </>
+    ): (
+      <>
+      <div className="m-10 ml-24">
+        <h1 className="text-xl font-semibold">My Wishlist({wishlistproducts.length} Items)</h1>
       </div>
       <div className="grid grid-cols-3 justify-around m-10 mb-[20rem] relative">
         {wishlistproducts &&
@@ -60,7 +72,6 @@ export default function Wishlist() {
                   src={item.product.imagePath}
                   alt=""
                 />
-                {/* <span>{item.product.productId}</span> */}
                 <div className="mb-2 text-center">
                   {item.product.productName}
                   <p className="font-semibold text-center mt-2 text-sm">
@@ -90,6 +101,9 @@ export default function Wishlist() {
             );
           })}
       </div>
+      </>   
+      )
+    )}
     </>
   );
 }

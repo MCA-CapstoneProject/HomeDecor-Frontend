@@ -7,6 +7,8 @@ import { listProducts, sortedProducts } from "../../helper/product.helper";
 import { productState } from "../../features/product/product.slice";
 import { wishlistHelper } from "../../helper/wishlist.helper";
 import { wishlistState } from "../../features/product/wishlist.slice";
+import { getHeaders } from "../../../config";
+import { handleClick } from "../../components/Toastcontainer";
 
 const Plantdecor = () => {
 
@@ -15,6 +17,7 @@ const Plantdecor = () => {
   const {list} = useSelector(wishlistState);
 
 
+  console.log(productsList);
   async function getProd() {
     await axios
       .get("http://localhost:8082/product/getAllProduct")
@@ -57,29 +60,32 @@ const Plantdecor = () => {
 
 
   //addto cart
-  // const addtoCart = async (productId) => {
-  //   const parsedUserId = parseInt(userId);
+  const addtoCart = async (productId) => {
+    const parsedUserId = parseInt(userId);
 
-  //   await axios
-  //     .post("http://localhost:8082/product/addToCart", {
-  //       productId,
-  //       userId: parsedUserId,
-  //     })
-  //     .then((response) => {
-  //       if (response.status === 200) {
-  //         console.log(response.data);
-  //         console.log("product added to cart success");
-  //       } else if (response.status === 401) {
-  //         console.log(response);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       // Handle any errors
-  //       console.log(error);
-  //       console.log(error.response.data.details[0]);
-  //    //   handleClick("error", error.response.data.details[0]);
-  //     });
-  // };
+    await axios
+      .post("http://localhost:8082/secured/product/addToCart", {
+        productId,
+        userId: parsedUserId,
+      },
+      getHeaders()
+      )
+      .then((response) => {
+        if (response.status === 200) {
+          console.log(response.data);
+          handleClick("success", "Product Added To Cart");
+          console.log("product added to cart success");
+        } else if (response.status === 401) {
+          console.log(response);
+        }
+      })
+      .catch((error) => {
+        // Handle any errors
+        console.log(error);
+        console.log(error.response.data.details[0]);
+     //   handleClick("error", error.response.data.details[0]);
+      });
+  };
 
   //fetchwishlist API
   // const fetchWishlistProducts = async () => {
@@ -272,7 +278,7 @@ const Plantdecor = () => {
                         onClick={() => singleProduct(item.productId)}
                         to={`/singleproduct/${item.productId}`}
                       >
-                        <img src={item.imagePath} alt="product-image" />
+                        <img src={item.imagePath} className="w-[20rem] h-[20rem]" alt="product-image" />
                       </Link>
                     </div>
                     <div className="p-7">
@@ -323,7 +329,7 @@ const Plantdecor = () => {
                         {list && list.includes(item.productId) ? 'Remove from Wishlist' : 'Add to Wishlist'}
                       </button>
                       <button
-                       // onClick={() => addtoCart(item.productId)}
+                       onClick={() => addtoCart(item.productId)}
                         className="mt-4 w-full text-[#9d6a37] border-[1.5px] 
                                   border-[#9d6a37] px-3 py-2 rounded uppercase hover:bg-[#9d6a37] hover:text-[#fff]"
                       >

@@ -2,14 +2,18 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { authState } from "../features/authenticate/authSlice";
+import { getHeaders } from "../../config";
+import { Link } from "react-router-dom";
 
 export default function cart() {
   const [amount, setAmount] = useState(1);
   const { userId } = useSelector(authState);
-  const [cartproducts, setCartProducts] = useState();
+  const [cartproducts, setCartProducts] = useState([]);
 
   async function removeCartProducts(cartId) {
-    await axios.delete(`http://localhost:8082/product/deleteCart?cartId=${cartId}`)
+    await axios.delete(`http://localhost:8082/secured/product/deleteCart?cartId=${cartId}`,
+    getHeaders()
+    )
       .then((response) => {
         console.log(response.data);
         // setWishlistproducts(response.data);
@@ -25,7 +29,9 @@ export default function cart() {
   useEffect(() => {
 
     async function fetchCartProducts() {
-      await axios.get("http://localhost:8082/product/getCart?userId=" + parseInt(userId))
+      await axios.get("http://localhost:8082/secured/product/getCart?userId=" + parseInt(userId),
+      getHeaders()
+      )
         .then((response) => {
           console.log(response.data);
           setCartProducts(response.data);
@@ -43,7 +49,16 @@ export default function cart() {
 
   return (
     <>
-
+    {(cartproducts.length==0 ? (
+      <>
+      <div className="m-10 ml-24">
+        <h2 className="text-xl font-medium py-8">Your Cart Is Empty </h2>
+        <Link to="/shop">
+        Add Some Product To Cart
+        </Link>
+      </div>
+      </>
+    ): (
       <div>
         <div className='text-xl font-bold justify-center text-left ml-40 mt-10 mb-10'>Your Cart </div>
         <div className='bg-green-100 w-2/5 ml-40 mb-4 p-1 text-center'>
@@ -94,6 +109,7 @@ export default function cart() {
                   <div className='font-bold uppercase border-black border-t-2 mt-5'>You Pay</div>
                   <div className='text-green-600 font-semibold mb-2'>You Saved</div>
                 </div>
+                
                 <div className='ml-60'>
                   <div className='mt-4'>{cartproducts.length}</div>
                   <div className='mb-2'>Rs.{item.productMasterDto.discountPrice}</div>
@@ -106,8 +122,9 @@ export default function cart() {
             <button className='bg-red-400 w-[500px] border-2 border-red-400 text-white font-bold uppercase mt-3 p-5 hover:bg-transparent hover:text-[#111]'>Proceed To Checkout</button>
           </div>
         </div>
-
-      </div>
+      </div>   
+      )
+    )}
     </>
   )
 }

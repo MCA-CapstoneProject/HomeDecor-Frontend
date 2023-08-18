@@ -5,7 +5,7 @@ import image1 from '../../public/assets/productimages/statue-finesse-1.jpg'
 import image2 from '../../public/assets/productimages/statue-finesse-2.jpg'
 import image3 from '../../public/assets/productimages/statue-finesse-3.jpg'
 import image4 from '../../public/assets/productimages/statue-finesse-4.jpg'
-
+import { handleClick } from "../components/Toastcontainer";
 
 const ProductCard = () => {
 
@@ -35,16 +35,13 @@ const ProductCard = () => {
         getProductById(segments[2]);
     }, [])
     
-    
-        
-
   const [images, setImages] = useState({
     image1, image2, image3, image4
   })
 
-  const [activeImg, setActiveImage] = useState(images.image1)
+//   const [activeImg, setActiveImage] = useState(images.image1)
   
-  const [amount, setAmount] = useState(productdata? productdata.quantity : 0);
+  const [productquantity, setproductQuantity] = useState(productdata ? productdata.quantity : 0);
   
 
   return (
@@ -74,9 +71,9 @@ const ProductCard = () => {
 
               <div className='flex flex-row items-center gap-12'>
                   <div className='flex flex-row items-center'>
-                      <button className='bg-gray-200 py-2 px-5 rounded-lg text-violet-800 text-3xl' onClick={() => setAmount((prev) => prev - 1)}>-</button>
-                      <span className='py-4 px-6 rounded-lg'>{amount}</span>
-                      <button className='bg-gray-200 py-2 px-4 rounded-lg text-violet-800 text-3xl' onClick={() => setAmount((prev) => prev + 1)}>+</button>
+                      <button className='bg-gray-200 py-2 px-5 rounded-lg text-violet-800 text-3xl' onClick={() => (productquantity<=1 ? handleClick('error', "Cannot select quantity less than 1"): setproductQuantity((prev) => prev - 1))}>-</button>
+                      <span className='py-4 px-6 rounded-lg'>1</span>
+                      <button className='bg-gray-200 py-2 px-4 rounded-lg text-violet-800 text-3xl' onClick={() => (productquantity>=productdata?.quantity ? handleClick('error', `Cannot select more than ${productdata?.quantity}`): setproductQuantity((prev) => prev + 1))}>+</button>
                   </div>
                   <button className='bg-red-400 text-base text-white 
                   font-semibold py-3 px-8 lg:px-16 lg:py-4 rounded-xl 
