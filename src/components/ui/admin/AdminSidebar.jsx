@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { fetchAccessToken, setAuthUsername, storeUserId } from "../../helper/Auth.helper";
+import { fetchAccessToken, setAuthUsername, storeUserId } from "../../../helper/Auth.helper";
 
 
 const AdminSidebar = () => {

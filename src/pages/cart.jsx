@@ -10,6 +10,7 @@ export default function Cart() {
   const { userId } = useSelector(authState);
   const [cartproducts, setCartProducts] = useState([]);
 
+  //remove from cart
   async function removeCartProducts(cartId) {
     await axios.delete(`http://localhost:8082/secured/product/deleteCart?cartId=${cartId}`,
     getHeaders()
@@ -26,6 +27,7 @@ export default function Cart() {
       });
   }
 
+  //fetch cart products
   async function fetchCartProducts() {
     await axios.get("http://localhost:8082/secured/product/getCart?userId=" + parseInt(userId),
     getHeaders()
