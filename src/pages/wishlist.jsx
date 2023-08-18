@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { authState } from "../features/authenticate/authSlice";
+import { getHeaders } from "../../config";
 
 export default function Wishlist() {
   const { userId } = useSelector(authState);
@@ -27,8 +28,9 @@ export default function Wishlist() {
     async function fetchWishlitProducts() {
       await axios
         .get(
-          "http://localhost:8082/product/getWishlistProduct?userId=" +
-            parseInt(userId)
+          "http://localhost:8082/secured/product/getWishlistProduct?userId=" +
+            parseInt(userId),
+             getHeaders()
         )
         .then((response) => {
           console.log(response.data);

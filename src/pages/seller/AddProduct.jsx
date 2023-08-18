@@ -28,6 +28,7 @@ function AddProduct() {
       "ratings": formData.get("prod_rating"),
       "productCode": formData.get("prod_code"),
       "price": formData.get("prod_price"),
+      "discount_price": formData.get("prod_discountedprice"),
       "imagePath" :base64Image,
       "quantity" : formData.get("prod_quantity"),
       "size" : formData.get("prod_size"),
@@ -94,6 +95,13 @@ function AddProduct() {
           className="outline-none bg-transparent w-[400px] mt-8 border-b-2 text-gray-500"
           type="text"
           placeholder="Enter Product Price"
+        />
+        </span>
+        <span>
+        <input name="prod_discountedprice"
+          className="outline-none bg-transparent w-[400px] mt-8 border-b-2 text-gray-500"
+          type="text"
+          placeholder="Enter Discounted Product Price"
         />
         </span>
         <select  name="prod_category" className="form-select outline-none text-gray-400 border-b-2 mt-8">
