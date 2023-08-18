@@ -7,7 +7,7 @@ import { authState } from "../../features/authenticate/authSlice";
 function AddProduct() {
   const formRef = useRef(null);
   const [base64Image, setbase64Image] = useState("");
-  const apiUrl = "http://localhost:8082/product/add";
+  const apiUrl = "http://localhost:8082/secured/product/add";
   const { user, userId } = useSelector(authState);
 
   const handleFileChange = (event) => {
@@ -37,7 +37,10 @@ function AddProduct() {
       "categoryDto": {
         "categoryId": formData.get("prod_category")
       },
-      "userId": userId
+      "userDto" :{
+        "userId": parseInt(userId)
+      }
+      
     }
     await axios
       .post(apiUrl, payload, getHeaders())
