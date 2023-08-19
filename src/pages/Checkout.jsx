@@ -66,11 +66,11 @@ function Checkout() {
                             <div className='mt-5'>
                                         <p>Sculpted Wall Mirror</p>
                                         <p className='text-slate-400'>By MegaArts from Decorica</p>
-                                    <div className='flex flex-row items-center'>
+                                    {/* <div className='flex flex-row items-center'>
                                         <button className='bg-gray-200 px-3 rounded-lg text-violet-800 text-3xl' onClick={() => setAmount((prev) => prev - 1)}>-</button>
                                         <span className='py-4 px-6 rounded-lg'>{amount}</span>
                                         <button className='bg-gray-200 px-3 rounded-lg text-violet-800 text-3xl' onClick={() => setAmount((prev) => prev + 1)}>+</button>
-                                    </div>
+                                    </div> */}
                             </div>
                             <div className='text-red-400 h-5 text-xl mt-6 ml-14 cursor-pointer'><RiDeleteBinLine /></div>
                         </div> 

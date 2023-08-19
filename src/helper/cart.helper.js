@@ -30,6 +30,7 @@ async function addToCart(productId, userId) {
       {
         productId,
         userId: parsedUserId,
+        quantity: 1,
       },
       getHeaders()
     )

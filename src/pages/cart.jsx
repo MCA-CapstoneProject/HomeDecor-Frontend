@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 export default function Cart() {
   const { userId } = useSelector(authState);
   const [cartproducts, setCartProducts] = useState([]);
+  console.log(cartproducts);
+  const [updatedquantity, setupdatedQuantity] = useState();
 
   //remove from cart
   async function removeCartProducts(cartId) {
@@ -26,21 +28,31 @@ export default function Cart() {
       });
   }
 
+  // const parsedUserId = parseInt(userId);
+  
   async function updateQuantity(id, newQuantity) {
+   
     await axios.post("http://localhost:8082/secured/product/updateCart",
     { cartId: parseInt(id),
-      quantity:newQuantity
+      quantity:newQuantity,
+      
+      // userId: parsedUserId,
+      // productId: 
     },
     getHeaders()
     )
       .then((response) => {
+        console.log(newQuantity);
+        setupdatedQuantity(newQuantity);
         console.log(response.data);
       })
       .catch((error) => {
         console.error("Error:", error);
       });
+    
   }
 
+  
   //fetch cart products
   async function fetchCartProducts() {
     await axios.get("http://localhost:8082/secured/product/getCart?userId=" + parseInt(userId),
@@ -59,16 +71,18 @@ export default function Cart() {
 
   useEffect(() => {
     fetchCartProducts();
-  }, [])
+  }, [updatedquantity])
 
 
   const decrement = (id, quantity) =>{
     const amount = quantity -1 >0 && quantity-1
     updateQuantity(id,amount);
+    // console.log(quantity);
   }
   const increment = (id, quantity, productQuantity) =>{
-    const amount = quantity +1 <= productQuantity && quantity+1
+    const amount = quantity + 1 ;
     updateQuantity(id,amount);
+    // console.log(quantity);
   }
 
   return (
@@ -99,6 +113,7 @@ export default function Cart() {
                 </div>
               </div>
               <div className='mt-5'>
+                {/* <p>{item.productMasterDto.productId}</p> */}
                 <p>{item.productMasterDto.productName}</p>
                 <p className='text-slate-400'>{item.productMasterDto.brandDto.brandName}</p>
                 <div className='flex flex-row items-center'>
