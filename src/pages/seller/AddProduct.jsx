@@ -62,8 +62,8 @@ function AddProduct() {
   return (
     <>
     <div className="head items-center text-gray-300 px-10 bg-[#34495E] select-none h-36 rounded-2xl mx-auto shadow-xl">
-      <h1 className='text-3xl pt-8'>Hello {user}, Want To Add Some Products?</h1>
-      <p className='text-lg py-4'>Well Go Ahead, Add the Details and Images of the Product and Click on the Submit Button to Apply the Changes. </p>
+      <h1 className='text-3xl pt-14'>Hello {user}, Want To Add Some Products?</h1>
+      {/* <p className='text-lg py-4'>Well Go Ahead, Add the Details and Images of the Product and Click on the Submit Button to Apply the Changes. </p> */}
     </div>
     <div className="container mx-auto mt-10 w-[500px] h-auto rounded-2xl shadow-2xl">
     <form ref={formRef} onSubmit={handleSubmit} className="grid w-2/5 px-16 py-10">
