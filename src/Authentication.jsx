@@ -28,6 +28,7 @@ import ProductCard from "./pages/ProductCard";
 import Interiorlights from "./pages/categories/Interiorlights";
 import Mirrors from "./pages/categories/Mirrors";
 import Showpieces from "./pages/categories/Showpieces";
+import Checkout from "./pages/Checkout";
 
 const Authentication = () => {
   const domain = "dev-72e1ark1yfj8hz53.us.auth0.com";
@@ -77,6 +78,7 @@ const Authentication = () => {
                 <Route path="/shop/mirrors" exact element={<Mirrors/>} />
                 <Route path="/shop/showpieces" exact element={<Showpieces/>} />
                 {/* <Route path="/profile" exact element={<UserProfile/>} /> */}
+                <Route path="/ordercheckout/:totalprice" exact element={<Checkout/>} />
               </Routes>
             </Layout>
           )}
@@ -220,7 +222,6 @@ const Authentication = () => {
                 exact
                 element={
                   <SuspenseWrapper>
-                    <h1>PROFILE OF SELLER</h1>
                     <Profile />
                   </SuspenseWrapper>
                 }

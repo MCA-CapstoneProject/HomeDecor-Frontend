@@ -190,7 +190,9 @@ export default function Cart() {
                 <h1>Total Price</h1>
                 <h1 className="text-green-500">Rs. {totalcost}</h1>
               </div>
-            <button className='bg-red-400 w-[500px] border-2 border-red-400 text-white font-bold uppercase mt-3 p-5 hover:bg-transparent hover:text-[#111]'>Proceed To Checkout</button>
+            <Link to={`/ordercheckout/${totalcost}`} className='bg-red-400 w-[100%] text-center block border-2 border-red-400 text-white font-bold uppercase mt-3 p-5 hover:bg-transparent hover:text-[#111]'>
+              Proceed To Checkout
+            </Link>
           </div>
         </div>
         </div>
