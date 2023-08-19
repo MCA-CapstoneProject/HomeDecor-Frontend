@@ -2,9 +2,16 @@ import { Link } from "react-router-dom";
 import { fetchAccessToken, setAuthUsername, storeUserId } from "../../../helper/Auth.helper";
 
 export default function Sidebar() {
+  const userId = sessionStorage.getItem('userId');
     fetchAccessToken(sessionStorage.getItem('token'))
     storeUserId(sessionStorage.getItem("userId"));
     setAuthUsername(sessionStorage.getItem("uname"));
+
+  
+    const handleLogout = () => {
+      fetchAccessToken(undefined);
+      sessionStorage.clear();
+    }
   return (
     <nav className="relative h-screen w-60 bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)]">
       {/* Sidebar content */}
@@ -109,10 +116,12 @@ export default function Sidebar() {
           <span className="mx-3">Profile</span>
         </Link>
 
-        <Link
+        <Link to='/seller-dashboard/login'
+          onClick={userId &&  handleLogout}
           href="#"
           class="flex items-center px-6 py-4 active:text-red text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
         >
+
           <svg
             className="w-6 h-6"
             fill="none"

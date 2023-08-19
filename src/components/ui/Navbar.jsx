@@ -22,8 +22,8 @@ function Navbar() {
     setActiveLink(path);
   };
   const handleLogout = () =>{
-    sessionStorage.removeItem("token");
     fetchAccessToken(undefined);
+    sessionStorage.clear();
   }
 
   return (

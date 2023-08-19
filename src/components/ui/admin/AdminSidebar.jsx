@@ -4,9 +4,15 @@ import { fetchAccessToken, setAuthUsername, storeUserId } from "../../../helper/
 
 const AdminSidebar = () => {
   const userId = sessionStorage.getItem('userId');
-    fetchAccessToken(sessionStorage.getItem('token'))
-    storeUserId(sessionStorage.getItem("userId"));
-    setAuthUsername(sessionStorage.getItem("uname"));
+  fetchAccessToken(sessionStorage.getItem('token'))
+  storeUserId(sessionStorage.getItem("userId"));
+  setAuthUsername(sessionStorage.getItem("uname"));
+
+  const handleLogout = () => {
+    fetchAccessToken(undefined);
+    sessionStorage.clear();
+  }
+
   return (
     <>
       <nav className="w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
@@ -45,9 +51,10 @@ const AdminSidebar = () => {
                     className={`font-thin text-black hover:text-gray-500 hover:font-semibold py-2 uppercase`}>
                     Orders
                   </Link>
-                  <Link key=""
+                  <Link key="" to='/admin-dashboard/login'
+                   onClick={userId &&  handleLogout}
                     className={` font-thin text-black hover:text-gray-500 hover:font-semibold py-2 uppercase`}>
-                    {userId ? 'Logout' : 'Login'}
+                    Logout
                   </Link>
                 </div>
               </div>

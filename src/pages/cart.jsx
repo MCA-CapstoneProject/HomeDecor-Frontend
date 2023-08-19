@@ -10,6 +10,7 @@ export default function Cart() {
   const [cartproducts, setCartProducts] = useState([]);
   console.log(cartproducts);
   const [updatedquantity, setupdatedQuantity] = useState();
+  const [totalcost, setTotalCost] = useState();
 
   //remove from cart
   async function removeCartProducts(cartId) {
@@ -54,24 +55,48 @@ export default function Cart() {
 
   
   //fetch cart products
-  async function fetchCartProducts() {
-    await axios.get("http://localhost:8082/secured/product/getCart?userId=" + parseInt(userId),
-    getHeaders()
-    )
-      .then((response) => {
-        console.log(response.data);
-        setCartProducts(response.data);
-        console.log(cartproducts);
+  // async function fetchCartProducts() {
+  //   await axios.get("http://localhost:8082/secured/product/getCart?userId=" + parseInt(userId),
+  //   getHeaders()
+  //   )
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       setCartProducts(response.data);
+  //       console.log(cartproducts);
 
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error:", error);
+  //     });
+  // }
 
   useEffect(() => {
+    async function fetchCartProducts() {
+      await axios.get("http://localhost:8082/secured/product/getCart?userId=" + parseInt(userId),
+      getHeaders()
+      )
+        .then((response) => {
+          setCartProducts(response.data);
+  
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
     fetchCartProducts();
-  }, [updatedquantity])
+
+    const calculateTotalCost = () => {
+      let totalCost = 0;
+      for (const item of cartproducts) {
+        const itemCost = item.productMasterDto.discountPrice * item.quantity;
+        totalCost += itemCost;
+      }
+      return totalCost;
+    };
+
+     setTotalCost(calculateTotalCost); 
+
+  }, [cartproducts])
 
 
   const decrement = (id, quantity) =>{
@@ -80,10 +105,12 @@ export default function Cart() {
     // console.log(quantity);
   }
   const increment = (id, quantity, productQuantity) =>{
-    const amount = quantity + 1 ;
+    const amount = quantity + 1 <= productQuantity.quantity && quantity+1 ;
     updateQuantity(id,amount);
     // console.log(quantity);
   }
+
+
 
   return (
     <>
@@ -161,7 +188,7 @@ export default function Cart() {
               </table>
               <div className="flex justify-between p-6 font-bold text-xl">
                 <h1>Total Price</h1>
-                <h1 className="text-green-500">Rs. 0000</h1>
+                <h1 className="text-green-500">Rs. {totalcost}</h1>
               </div>
             <button className='bg-red-400 w-[500px] border-2 border-red-400 text-white font-bold uppercase mt-3 p-5 hover:bg-transparent hover:text-[#111]'>Proceed To Checkout</button>
           </div>
